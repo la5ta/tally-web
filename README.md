@@ -16,7 +16,7 @@ We mainly use the following to work in this project:
 - [NextJS](https://nextjs.org/)
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
-- CSS?
+- CSS
 
 ## Installation
 
