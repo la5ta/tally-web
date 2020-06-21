@@ -41,12 +41,3 @@ $ docker run --name my-tally-web -p 3000:3000 tally-web
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for submitting pull requests.
-
-
-## Contributing
-
-Pull requests are the way to go. For major changes, please open an issue first to discuss what you would like to change.
-
-Pushing directly to master should be avoided, create a feature branch and then a pull request to merge with master.
-
-Please make sure to update tests as appropriate.
