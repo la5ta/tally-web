@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index should render without throwing an error 1`] = `
+Array [
+  <header>
+    <nav
+      aria-label="main navigation"
+      className="navbar is-fixed-top"
+      role="navigation"
+    >
+      <div
+        className="navbar-brand"
+      >
+        <a
+          className="navbar-item"
+          href="/"
+        >
+          Dukaat
+        </a>
+      </div>
+    </nav>
+  </header>,
+  <h1>
+    Hello Next.js 
+    <span
+      aria-label="hand wave"
+      role="img"
+    >
+      👋
+    </span>
+  </h1>,
+]
+`;

@@ -41,3 +41,16 @@ $ docker run --name my-tally-web -p 3000:3000 tally-web
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for submitting pull requests.
+
+## Testing
+
+To run all test use:
+
+```bash
+$ yarn test
+```
+
+to see the coverage of the test run:
+```bash
+$ yarn test --coverage
+```
