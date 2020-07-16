@@ -26,9 +26,9 @@ RUN yarn install
 #
 # ---- Test ----
 # run linters, setup and tests
-# FROM dependencies AS test
-# COPY . .
-# RUN  yarn lint && yarn build
+FROM dependencies AS test
+COPY . .
+RUN yarn lint && yarn build && yarn jest
 
 #
 # ---- Release ----

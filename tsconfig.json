@@ -19,11 +19,14 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": [
+        "components/*"
+      ]
     }
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "prod_node_modules"
   ],
   "include": [
     "next-env.d.ts",

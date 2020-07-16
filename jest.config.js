@@ -14,9 +14,11 @@ module.exports = {
     },
     coveragePathIgnorePatterns: [
         "/node_modules/",
-        "enzyme.js"
+        "enzyme.js",
+        "/prod_node_modules/"
     ],
     setupFilesAfterEnv: [
         "<rootDir>/enzyme.js"
-    ]
+    ],
+    modulePathIgnorePatterns: ["/prod_node_modules/"]
 };
