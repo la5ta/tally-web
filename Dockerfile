@@ -40,5 +40,5 @@ COPY --from=dependencies /root/app/prod_node_modules ./node_modules
 # copy app sources
 COPY . .
 # expose port and define CMD
-EXPOSE 3000
+
 CMD yarn dev
