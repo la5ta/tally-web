@@ -1,15 +1,19 @@
 #
 # ---- Base Node ----
 FROM alpine:3.12 AS base
+# Env vars
+ENV WEBROOT /webroot/default
+ENV PORT 9999
+ENV NODE_ENV production
 # install node
 RUN apk add --no-cache nodejs-current tini nodejs-npm yarn
 # set working directory
-WORKDIR /root/app
+WORKDIR ${WEBROOT}
 # Set tini as entrypoint
 ENTRYPOINT ["/sbin/tini", "--"]
 # copy project file
-COPY package*.json .
-COPY yarn.lock ./
+COPY package*.json ${WEBROOT}
+COPY yarn.lock ${WEBROOT}
 
 #
 # ---- Dependencies ----
@@ -36,9 +40,9 @@ RUN yarn lint && yarn test
 # ---- Release ----
 FROM base AS release
 # copy production node_modules
-COPY --from=dependencies /root/app/prod_node_modules ./node_modules
+COPY --from=dependencies ${WEBROOT}/prod_node_modules ${WEBROOT}/node_modules
 # copy app sources
 COPY . .
 # expose port and define CMD
-
+EXPOSE ${PORT}
 CMD yarn dev
