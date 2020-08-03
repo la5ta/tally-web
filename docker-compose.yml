@@ -1,0 +1,30 @@
+version: '3.8'
+
+# Base service template that will be shared with all services using anchors. https://tinyurl.com/yy9s3hrk
+x-base-service: &base
+  env_file: .env
+  ## disable logging
+  # logging:
+  #   driver: none
+
+services:
+  # DB
+  postgres:
+    <<: *base
+    build: ./compose/postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  # Hasura
+  hasura:
+    <<: *base
+    image: hasura/graphql-engine:${HASURA_VERSION}
+    depends_on:
+      - postgres
+    volumes:
+      - ./compose/hasura/migrations:/hasura-migrations
+      - ./compose/hasura/metadata:/hasura-metadata
+    ports:
+      - 8888:8888
+    command: graphql-engine serve
+volumes:
+  pg_data:
