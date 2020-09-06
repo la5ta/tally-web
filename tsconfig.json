@@ -5,7 +5,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,6 +18,7 @@
       "@components/*": ["components/*"],
       "@queries/*": ["queries/*"],
       "@schema/*": ["schema/*"],
+      "@models/*": ["models/*"],
       "@lib/*": ["lib/*"]
     }
   },
