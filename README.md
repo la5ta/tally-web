@@ -27,7 +27,7 @@ cd tally-web
 
 ## Usage
 
-To directly run this container use the following:
+First we need a graphql service with a database. Using docker-compose, build and run the containers needed:
 ```bash
 docker build -t tally-web .
 
@@ -38,9 +38,13 @@ $ docker run --name my-tally-web -p 3000:3000 -e NODE_ENV=development tally-web
 $ docker run --name my-tally-web -p 3000:3000 tally-web
 ```
 
-## Contributing
+## Relay and Next.JS
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for submitting pull requests.
+Before running next, we need to make sure the queries are valid with the relay schema. Build the queries files and finally, we can run next.
+```bash
+$ yarn build-schema
+$ yarn dev
+```
 
 ## Testing
 
@@ -54,3 +58,7 @@ to see the coverage of the test run:
 ```bash
 $ yarn test --coverage
 ```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for submitting pull requests.
