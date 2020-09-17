@@ -17,7 +17,7 @@ const IndexPage: NextPage<Props> = ({ users = [] }) => {
 
   return (
     <Layout>
-      <h1>Hello {users[1].name}!! <span role="img" aria-label="hand wave">👋</span></h1>
+      <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
 
       <h3>Users:</h3>
       <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>

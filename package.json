@@ -11,9 +11,10 @@
     "test": "jest --coverage",
     "build-relay": "yarn schema && yarn relay",
     "schema": "gq ${NEXT_PUBLIC_RELAY_ENDPOINT-http://localhost:8888/v1/graphql} --introspect > ./src/schema/schema.graphql",
-    "relay": "relay-compiler --src ./src --exclude '**/.next/**' '**/node_modules/**' '**/test/**'  '**/__generated__/**' --exclude '**/schema/**' --schema ./src/schema/schema.graphql --extensions ts tsx"
+    "relay": "relay-compiler --src ./src --exclude '**/.next/**' '**/node_modules/**' '**/test/**'  '**/__generated__/**' --exclude '**/schema/**' --schema ./src/schema/schema.graphql --extensions ts tsx --language typescript"
   },
   "dependencies": {
+    "jest-transform-graphql": "^2.1.0",
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -27,6 +28,7 @@
     "@types/react": "^16.9.41",
     "@types/react-relay": "^7.0.8",
     "@types/react-test-renderer": "^16.9.2",
+    "@types/relay-test-utils": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "babel-plugin-relay": "^10.0.1",
@@ -44,6 +46,8 @@
     "prettier": "^2.0.5",
     "react-test-renderer": "^16.13.1",
     "relay-compiler": "^10.0.1",
+    "relay-test-utils": "^10.0.1",
+    "relay-compiler-language-typescript": "^13.0.1",
     "ts-jest": "^26.1.1",
     "typescript": "^3.9.5"
   }

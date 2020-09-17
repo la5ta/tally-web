@@ -22,4 +22,8 @@ module.exports = {
   ],
   setupFilesAfterEnv: ['<rootDir>/enzyme.js'],
   modulePathIgnorePatterns: ['/prod_node_modules/'],
+  transform: {
+    '\\.(gql|graphql)$': 'jest-transform-graphql',
+    '.*': 'babel-jest',
+  },
 };

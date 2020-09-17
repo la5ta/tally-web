@@ -1,12 +1,43 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
-import Index from '../pages/index';
+import indexPageQuery from '@queries/indexPage';
 import 'jsdom-global/register';
+import React from 'react';
+import { QueryRenderer } from 'react-relay';
+import ReactTestRenderer from 'react-test-renderer';
+import {
+  createMockEnvironment,
+  MockPayloadGenerator,
+  RelayMockEnvironment
+} from 'relay-test-utils';
+import Index from '../pages/index';
 
 describe('Index', () => {
-    it('should render without throwing an error', () => {
-        const testRenderer = TestRenderer.create(<Index />);
-        expect(testRenderer.toJSON()).toMatchSnapshot();
-    });
+  let testComponent: ReactTestRenderer.ReactTestRenderer;
+  let environment: RelayMockEnvironment;
+
+  beforeEach(() => {
+    environment = createMockEnvironment();
+
+    const renderQuery = (renderProps) => {
+      const users = renderProps.props && renderProps.props.users || [];
+
+      return <Index users={users} />;
+    };
+
+    const IndexRenderer = () => (
+      <QueryRenderer
+        environment={environment}
+        query={indexPageQuery}
+        variables={{}}
+        render={renderQuery}
+      />
+    );
+
+    testComponent = ReactTestRenderer.create(<IndexRenderer />);
+    environment.mock.resolveMostRecentOperation((operation) => MockPayloadGenerator.generate(operation));
+  });
+
+  it('should render the index with data', () => {
+    expect(testComponent.toJSON()).toMatchSnapshot();
+  });
 
 });
