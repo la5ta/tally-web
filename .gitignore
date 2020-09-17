@@ -30,4 +30,4 @@ yarn-error.log*
 .env.production.local
 
 # relay generated
-__generated__/**
+**/__generated__/
