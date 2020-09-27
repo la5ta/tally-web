@@ -12,7 +12,7 @@ interface Props {
 
 const IndexPage: NextPage<Props> = ({ users = [] }) => {
   const usersItems = users.map(user =>
-    <li key={user.id}>{user.name}</li>
+    <li key={user._id}>{user.first_name}</li>
   );
 
   return (

@@ -35,7 +35,7 @@ Array [
   <p />,
   <ol>
     <li>
-      &lt;mock-value-for-field-"name"&gt;
+      &lt;mock-value-for-field-"first_name"&gt;
     </li>
   </ol>,
 ]
