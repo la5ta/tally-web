@@ -1,0 +1,273 @@
+// CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+// Creating tables
+Table users as U {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  first_name varchar
+  last_name varchar
+  email varchar(254)
+  password varchar
+  store_id uuid [not null]
+  created_at timestamp [default: `now()`]
+}
+
+Table stores as s {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  full_name varchar
+  short_name varchar
+  logo varchar
+  address varchar
+  city_id uuid [not null]
+  contact_email varchar(254) [unique]
+  created_at timestamp [default: `now()`]
+}
+
+Table stores_categories as sc {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  store_id uuid [not null]
+  description varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table countries as c {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  full_name varchar [unique, not null]
+  short_name varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table cities as ct {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  full_name varchar [unique, not null]
+  short_name varchar
+  country_id uuid [not null]
+  created_at timestamp [default: `now()`]
+}
+
+Table countries_taxes as cut {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  country_id uuid [not null]
+  description varchar
+  abbreviation varchar
+  value decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table countries_currency as cc {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  country_id uuid [not null]
+  description varchar
+  abbreviation varchar [unique]
+  created_at timestamp [default: `now()`]
+}
+
+// Products
+Table products as p {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  full_name varchar
+  description varchar
+  store_id uuid [not null]
+  product_category_id uuid [not null]
+  price decimal
+  price_compared decimal
+  cost decimal
+  country_tax_id uuid [not null]
+  created_at timestamp [default: `now()`]
+}
+
+Table products_categories as pc {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  description varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table products_tags as pt {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  product_id uuid [not null]
+  tag varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table products_media as pm {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  product_id uuid [not null]
+  path varchar
+  primary_media boolean
+  created_at timestamp [default: `now()`]
+}
+
+Table products_lots as pl {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  product_id uuid [not null]
+  entry_date timestamp [default: `now()`]
+  entry_quantity int
+  quantity int
+  expires_date timestamp
+  title varchar
+  product_media_id uuid
+  created_at timestamp [default: `now()`]
+}
+
+// Kardex
+Table kardex as k {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  product_lot_id uuid [not null]
+  type_movement_id uuid [not null]
+  quantity decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table types_movements as tm {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  description varchar
+  credit bit
+  debit bit
+  created_at timestamp [default: `now()`]
+}
+
+// Customers
+Table customers as cu {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  first_name varchar
+  last_name varchar
+  email varchar(254) [unique]
+  phone_number varchar
+  accept_emarketing bit
+  created_at timestamp [default: `now()`]
+}
+
+Table customers_tags as ct {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  costumer_id uuid [not null]
+  tag varchar
+  created_at timestamp [default: `now()`]
+}
+
+Table orders as o {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  entry_date timestamp [default: `now()`]
+  store_id uuid [not null]
+  customer_id uuid [not null]
+  sub_total decimal
+  tax_total decimal
+  discount_total decimal
+  total decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table orders_details as od {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  order_id uuid [not null]
+  product_lot_id uuid [not null]
+  quantity int
+  price decimal
+  price_rule_id uuid [not null]
+  sub_total decimal
+  tax_total decimal
+  discount_total decimal
+  total decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table customers_address as ca {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  customer_id uuid [not null]
+  city_id uuid [not null]
+  country_id uuid [not null]
+  address varchar
+  latitude decimal(10,8)
+  longitude decimal(11,8)
+  created_at timestamp [default: `now()`]
+}
+
+Table draft_orders as o {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  entry_date timestamp [default: `now()`]
+  store_id uuid [not null]
+  customer_id uuid [not null]
+  sub_total decimal [not null]
+  tax_total decimal [not null]
+  total decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table draft_orders_details as od {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  draft_order_id uuid [not null]
+  product_lot_id uuid [not null]
+  quantity int
+  price decimal
+  sub_total decimal
+  tax_total decimal
+  discount_total decimal
+  total decimal
+  created_at timestamp [default: `now()`]
+}
+
+Table price_rule as pr {
+  _id uuid [pk, default: `uuid_generate_v4 ()`]
+  product_id uuid [not null]
+  starts_at timestamp [default: `now()`]
+  ends_at timestamp
+  price decimal
+  once_per_costumer bit
+  value decimal
+  percent bit
+  created_at timestamp [default: `now()`]
+}
+
+Ref: "draft_orders_details"."draft_order_id" > "draft_orders"."_id"
+
+Ref: "draft_orders_details"."product_lot_id" > "products_lots"."_id"
+
+Ref: "customers"."_id" < "draft_orders"."customer_id"
+
+Ref: "stores"."_id" < "draft_orders"."store_id"
+
+Ref: "products"."_id" < "price_rule"."product_id"
+
+Ref: "price_rule"."_id" < "orders_details"."price_rule_id"
+
+Ref: "stores"."_id" < "users"."store_id"
+
+Ref: "countries"."_id" < "countries_currency"."country_id"
+
+Ref: "stores"."_id" < "stores_categories"."store_id"
+
+Ref: "cities"."country_id" > "countries"."_id"
+
+Ref: "stores"."city_id" > "cities"."_id"
+
+Ref: "stores"."_id" < "orders"."store_id"
+
+Ref: "customers"."_id" < "orders"."customer_id"
+
+Ref: "orders_details"."order_id" > "orders"."_id"
+
+Ref: "orders_details"."product_lot_id" > "products_lots"."_id"
+
+Ref: "customers"."_id" < "customers_address"."customer_id"
+
+Ref: "customers"."_id" < "customers_tags"."costumer_id"
+
+Ref: "cities"."_id" < "customers_address"."city_id"
+
+Ref: "countries"."_id" < "customers_address"."country_id"
+
+Ref: "products"."store_id" > "stores"."_id"
+
+Ref: "kardex"."product_lot_id" > "products_lots"."_id"
+
+Ref: "types_movements"."_id" < "kardex"."type_movement_id"
+
+Ref: "products"."_id" < "products_tags"."product_id"
+
+Ref: "products"."_id" < "products_media"."_id"
+
+Ref: "countries"."_id" < "countries_taxes"."_id"
+
+Ref: "products"."country_tax_id" > "countries_taxes"."_id"
+
+Ref: "products"."_id" < "products_lots"."product_id"
+
+Ref: "products"."product_category_id" > "products_categories"."_id"

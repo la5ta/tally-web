@@ -6,8 +6,8 @@ import { ConcreteRequest } from "relay-runtime";
 export type indexPage_indexQueryVariables = {};
 export type indexPage_indexQueryResponse = {
     readonly users: ReadonlyArray<{
-        readonly id: unknown;
-        readonly name: string;
+        readonly _id: unknown;
+        readonly first_name: string | null;
     }>;
 };
 export type indexPage_indexQuery = {
@@ -20,8 +20,8 @@ export type indexPage_indexQuery = {
 /*
 query indexPage_indexQuery {
   users {
-    id
-    name
+    _id
+    first_name
   }
 }
 */
@@ -40,14 +40,14 @@ var v0 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "id",
+        "name": "_id",
         "storageKey": null
       },
       {
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "name",
+        "name": "first_name",
         "storageKey": null
       }
     ],
@@ -72,14 +72,14 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "4624fe91ac06bc1a5d2df4ad4a53653e",
+    "cacheID": "dd1516d2b893a64c96c6e444fd1d7a6f",
     "id": null,
     "metadata": {},
     "name": "indexPage_indexQuery",
     "operationKind": "query",
-    "text": "query indexPage_indexQuery {\n  users {\n    id\n    name\n  }\n}\n"
+    "text": "query indexPage_indexQuery {\n  users {\n    _id\n    first_name\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '2d91be1d5293c8876c6829c0718b8a0f';
+(node as any).hash = 'ce9559627d7f839622f7384bc3fb27a8';
 export default node;
