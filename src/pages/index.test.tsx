@@ -1,5 +1,4 @@
 import indexPageQuery from '@queries/indexPage';
-import 'jsdom-global/register';
 import React from 'react';
 import { QueryRenderer } from 'react-relay';
 import ReactTestRenderer from 'react-test-renderer';
@@ -8,7 +7,7 @@ import {
   MockPayloadGenerator,
   RelayMockEnvironment
 } from 'relay-test-utils';
-import Index from '../pages/index';
+import Index from './index';
 
 describe('Index', () => {
   let testComponent: ReactTestRenderer.ReactTestRenderer;

@@ -1,42 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Index should render the index with data 1`] = `
-Array [
-  <header>
-    <nav
-      aria-label="main navigation"
-      className="navbar is-fixed-top"
-      role="navigation"
+<section
+  className="ant-layout"
+>
+  <header
+    className="ant-layout-header"
+  >
+    <div
+      className="logo"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": Object {
+            "default": [Function],
+          },
+        }
+      }
+    />
+  </header>
+  <main
+    className="ant-layout-content"
+  >
+    <div
+      className="ant-breadcrumb"
+    >
+      <span>
+        <span
+          className="ant-breadcrumb-link"
+        >
+          Home
+        </span>
+        <span
+          className="ant-breadcrumb-separator"
+        >
+          /
+        </span>
+      </span>
+      <span>
+        <span
+          className="ant-breadcrumb-link"
+        >
+          List
+        </span>
+        <span
+          className="ant-breadcrumb-separator"
+        >
+          /
+        </span>
+      </span>
+      <span>
+        <span
+          className="ant-breadcrumb-link"
+        >
+          App
+        </span>
+        <span
+          className="ant-breadcrumb-separator"
+        >
+          /
+        </span>
+      </span>
+    </div>
+    <div
+      className="site-layout-content"
     >
       <div
-        className="navbar-brand"
+        className="ant-row"
+        style={Object {}}
       >
-        <a
-          className="navbar-item"
-          href="/"
+        <div
+          className="ant-col ant-col-24"
+          style={Object {}}
         >
-          Dukaat
-        </a>
+          <h1>
+            Hello there!! 
+            <span
+              aria-label="hand wave"
+              role="img"
+            >
+              👋
+            </span>
+          </h1>
+          <h3>
+            Users:
+          </h3>
+          <p />
+          <ol>
+            <li>
+              &lt;mock-value-for-field-"first_name"&gt;
+            </li>
+          </ol>
+        </div>
       </div>
-    </nav>
-  </header>,
-  <h1>
-    Hello there!! 
-    <span
-      aria-label="hand wave"
-      role="img"
-    >
-      👋
-    </span>
-  </h1>,
-  <h3>
-    Users:
-  </h3>,
-  <p />,
-  <ol>
-    <li>
-      &lt;mock-value-for-field-"first_name"&gt;
-    </li>
-  </ol>,
-]
+    </div>
+  </main>
+  <footer
+    className="ant-layout-footer"
+  >
+    Josh & Louis ©
+  </footer>
+</section>
 `;
