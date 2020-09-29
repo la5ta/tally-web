@@ -19,10 +19,11 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': 'off', // We turn off prop-types rule, as we will use TypeScript's types instead.
-    'no-multiple-empty-lines': [1, { "max": 1 }]
+    'no-multiple-empty-lines': [1, { max: 1 }],
   },
   env: {
     browser: true,
     node: true,
+    jest: true,
   },
 };

@@ -19,7 +19,10 @@
       "@queries/*": ["queries/*"],
       "@schema/*": ["schema/*"],
       "@models/*": ["models/*"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@public/*": ["../public/*"],
+      "@styles/*": ["../public/styles/*"],
+      "@images/*": ["../public/images/*"]
     }
   },
   "exclude": ["node_modules", "prod_node_modules"],

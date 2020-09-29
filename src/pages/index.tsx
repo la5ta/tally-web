@@ -1,9 +1,10 @@
-import Layout from '@components/Layout';
+import Layout from '@components/Layouts/Main/Main';
 import { initEnvironment } from '@lib/relay';
 import { user } from '@models/user';
 import indexPageQuery from '@queries/indexPage';
 import { NextPage } from 'next';
 import React from 'react';
+import { Row, Col } from 'antd';
 import { fetchQuery } from 'react-relay';
 
 interface Props {
@@ -17,13 +18,17 @@ const IndexPage: NextPage<Props> = ({ users = [] }) => {
 
   return (
     <Layout>
-      <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
+      <Row>
+        <Col span={24}>
+          <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
 
-      <h3>Users:</h3>
-      <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
-      <ol>
-        {usersItems}
-      </ol>
+          <h3>Users:</h3>
+          <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
+          <ol>
+            {usersItems}
+          </ol>
+        </Col>
+      </Row>
     </Layout>
   );
 };
