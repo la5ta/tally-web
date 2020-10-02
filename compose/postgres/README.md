@@ -2,7 +2,7 @@ To create a dump:
 
 ```bash
 # Postgress Dump
-docker exec -it tally_postgres_1 /bin/bash
+docker exec -it tally-web_postgres_1 /bin/bash
   # Inside the shell...
   pg_dump -U postgres -d postgres > dump.sql
 
@@ -13,10 +13,10 @@ docker exec -it tally_postgres_1 /bin/bash
   #
 
 # Copy dump.sql from the container
-docker cp tally_postgres_1:/dump.sql ./
+docker cp tally-web_postgres_1:/dump.sql ./
 
 # Copy from local to container
-docker cp ./[path to dump file] tally_postgres_1:/dump.sql
+docker cp ./[path to dump file] tally-web_postgres_1:/dump.sql
 
 # Hasura metadata
 # We need to recreate hasura metadata when the DB changes
