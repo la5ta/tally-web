@@ -7,7 +7,7 @@ import {
   MockPayloadGenerator,
   RelayMockEnvironment
 } from 'relay-test-utils';
-import Index from './index';
+import Index, { getStaticProps } from '../../pages/index';
 
 describe('Index', () => {
   let testComponent: ReactTestRenderer.ReactTestRenderer;
@@ -39,4 +39,19 @@ describe('Index', () => {
     expect(testComponent.toJSON()).toMatchSnapshot();
   });
 
+  it('should getStaticProps return an Object', async () => {
+
+    const { Response } = jest.requireActual('node-fetch');
+    const ResponseInit = {
+      status: 200,
+      statusText: 'fail',
+      // headers: headers
+    };
+    const downloadDocumentData = { data: { users: [] } };
+    const response: Response = new Response(JSON.stringify(downloadDocumentData), ResponseInit);
+    global.fetch = jest.fn(() => Promise.resolve(response));
+
+    const result = await getStaticProps();
+    expect(result).toBeInstanceOf(Object);
+  });
 });

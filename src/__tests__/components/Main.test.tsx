@@ -1,6 +1,6 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
-import Layout from './Main';
+import Layout from '../../components/Layouts/Main/Main';
 
 jest.useFakeTimers();
 describe('Layout', () => {
