@@ -13,7 +13,6 @@ This is the web system of the Tally project.
 
 We mainly use the following to work in this project:
 
-- [Docker](https://www.docker.com/)
 - [NextJS](https://nextjs.org/)
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
@@ -24,20 +23,6 @@ We mainly use the following to work in this project:
 ```bash
 git clone git@github.com:la5ta/tally-web.git
 cd tally-web
-```
-
-## Usage
-
-First we need a graphql service with a database. Using docker-compose, build and run the containers needed:
-
-```bash
-docker build -t tally-web .
-
-# For development
-$ docker run --name my-tally-web -p 3000:3000 -e NODE_ENV=development tally-web
-
-# For production
-$ docker run --name my-tally-web -p 3000:3000 tally-web
 ```
 
 ## Relay and Next.JS
