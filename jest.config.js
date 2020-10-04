@@ -15,6 +15,8 @@ module.exports = {
     '@queries(.*)$': ['<rootDir>/src/queries/$1'],
     '@models(.*)$': ['<rootDir>/src/models/$1'],
     '@lib(.*)$': ['<rootDir>/src/lib/$1'],
+    '@config(.*)$': ['<rootDir>/src/config/$1'],
+    '@pages(.*)$': ['<rootDir>/src/pages/$1'],
     '@public(.*)$': ['<rootDir>/public/$1'],
     '@styles(.*)$': ['<rootDir>/public/styles/$1'],
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':

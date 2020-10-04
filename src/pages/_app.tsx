@@ -1,6 +1,8 @@
 import { useEnvironment } from '@lib/relay';
 import React from 'react';
 import { ReactRelayContext } from 'react-relay';
+import { DefaultSeo } from 'next-seo';
+import SEO from '@config/seo';
 
 import '@styles/antd.less';
 
@@ -10,6 +12,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ReactRelayContext.Provider value={{ environment }}>
+      <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </ReactRelayContext.Provider>
   );

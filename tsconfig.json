@@ -19,6 +19,8 @@
       "@queries/*": ["queries/*"],
       "@schema/*": ["schema/*"],
       "@models/*": ["models/*"],
+      "@config/*": ["config/*"],
+      "@pages/*": ["pages/*"],
       "@lib/*": ["lib/*"],
       "@public/*": ["../public/*"],
       "@styles/*": ["../public/styles/*"],
