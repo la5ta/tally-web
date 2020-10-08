@@ -3,6 +3,11 @@
 exports[`Index should render the index with data 1`] = `
 <section
   className="ant-layout"
+  style={
+    Object {
+      "minHeight": "100vh",
+    }
+  }
 >
   <header
     className="ant-layout-header"
@@ -93,11 +98,11 @@ exports[`Index should render the index with data 1`] = `
         </div>
       </div>
     </div>
+    <footer
+      className="ant-layout-footer"
+    >
+      Josh & Louis ©
+    </footer>
   </main>
-  <footer
-    className="ant-layout-footer"
-  >
-    Josh & Louis ©
-  </footer>
 </section>
 `;
