@@ -5,7 +5,7 @@ const { Footer } = Layout;
 const MainLayoutFooter = (): JSX.Element => {
 
   return (
-    <Footer>Josh &amp; Louis &copy;</Footer>
+    <Footer className="tally-footer">Josh &amp; Louis &copy;</Footer>
   );
 };
 

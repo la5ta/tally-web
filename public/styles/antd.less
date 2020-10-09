@@ -9,7 +9,7 @@
 @layout-header-padding     : 0 50px;
 @layout-header-color       : @text-color;
 @layout-footer-padding     : 24px 50px;
-@layout-footer-background  : @layout-body-background;
+@layout-footer-background  : @layout-header-background;
 @layout-sider-background   : @layout-header-background;
 @layout-trigger-height     : 48px;
 @layout-trigger-background : #002140;
@@ -111,8 +111,8 @@
 
 @-webkit-keyframes slide-right {
   0% {
-    -webkit-transform: translateX(-200);
-    transform        : translateX(-200);
+    -webkit-transform: translateX(-200px);
+    transform        : translateX(-200px);
   }
 
   100% {
@@ -139,15 +139,38 @@
     position: relative;
     width   : fit-content;
 
-    &.collapsed {
+    &.sider-collapsing {
 
       .squareAboveEverything {
         display: none;
       }
 
       .tally-sider {
+        display          : block;
         -webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         animation        : slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+    }
+
+    &.sider-collapsed {
+
+      .squareAboveEverything {
+        display: none;
+      }
+
+      .tally-sider {
+        display: none;
+      }
+    }
+
+    &.sider-showing {
+      .squareAboveEverything {
+        display: block;
+      }
+
+      .tally-sider {
+        -webkit-animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        animation        : slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
       }
     }
 
@@ -177,9 +200,13 @@
     .site-layout-content {
       background-color: white;
       width           : 1000px;
-      margin          : auto;
+      margin          : 20px auto auto;
       border-radius   : 5px;
       padding         : 10px;
+    }
+
+    .layout-min-height {
+      min-height: calc(100vh - 70px - 15%);
     }
 
     .tally-icon-button {
@@ -188,6 +215,11 @@
       font-size: 15pt;
       right    : 30px;
       position : relative;
+    }
+
+    .tally-footer {
+      background-color: @layout-footer-background;
+      color           : whitesmoke;
     }
 
   }

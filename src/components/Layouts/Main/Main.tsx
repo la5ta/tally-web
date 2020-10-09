@@ -19,14 +19,15 @@ const MainLayout = (
 ): JSX.Element => {
 
   const [collapsed, setCollapsed] = useState(true);
+  const [collapsedInitialState, setCollapsedInitialState] = useState(true)
 
   const toggle = () => {
-    console.log('toggle', !collapsed);
+    setCollapsedInitialState(false);
     setCollapsed(!collapsed);
   };
 
   const ShowOrNotSider = () => {
-    return collapsed ? 'collapsed' : '';
+    return collapsed ? (collapsedInitialState ? 'sider-collapsed' : 'sider-collapsing') : 'sider-showing';
   };
 
   return (
@@ -57,7 +58,9 @@ const MainLayout = (
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
-        <div className="site-layout-content">{children}</div>
+        <div className="layout-min-height">
+          <div className="site-layout-content">{children}</div>
+        </div>
         <MainLayoutFooter />
       </Content>
 
