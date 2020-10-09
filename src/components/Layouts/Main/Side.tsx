@@ -7,7 +7,6 @@ const { Sider } = Layout;
 const MainLayoutSider = (): JSX.Element => {
 
     const [current, setCurrent] = useState('mail');
-    const [collapsed, setCollapsed] = useState(true);
 
     const handleClick = e => {
         console.log('click ', e);
