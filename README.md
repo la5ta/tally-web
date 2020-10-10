@@ -37,16 +37,10 @@ $ yarn dev
 
 ## Testing
 
-To run all test use:
+To run all test and see the coverage, use the command:
 
 ```bash
 $ yarn test
-```
-
-to see the coverage of the test run:
-
-```bash
-$ yarn test --coverage
 ```
 
 ## Contributing
