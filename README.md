@@ -8,6 +8,7 @@ This is the web system of the Tally project.
 -->
 
 ![Deps](https://img.shields.io/david/la5ta/tally-web?style=for-the-badge&labelColor=000000)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Requirements
 
@@ -36,16 +37,10 @@ $ yarn dev
 
 ## Testing
 
-To run all test use:
+To run all test and see the coverage, use the command:
 
 ```bash
 $ yarn test
-```
-
-to see the coverage of the test run:
-
-```bash
-$ yarn test --coverage
 ```
 
 ## Contributing
