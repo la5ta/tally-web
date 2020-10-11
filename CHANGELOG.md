@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/la5ta/tally-web/compare/v0.2.0...v0.2.1) (2020-10-11)
+
+
+### Bug Fixes
+
+* **git:** change commit template to cz-conventional-changelog ([421dabb](https://github.com/la5ta/tally-web/commit/421dabb50c260ce69306f04176a9d2ac6bc95810))
+
 ## 0.2.0 (2020-10-11)
 
 
