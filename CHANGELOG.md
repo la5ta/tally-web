@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2020-10-12)
+
+
+### Bug Fixes
+
+* **docs:** correct badge style for commitizen on README ([1732266](https://github.com/la5ta/tally-web/commit/1732266a3c0896247e54ccc00c1476e7d89e2b56))
+
 ### [0.2.1](https://github.com/la5ta/tally-web/compare/v0.2.0...v0.2.1) (2020-10-11)
 
 
