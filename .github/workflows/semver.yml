@@ -12,8 +12,6 @@ jobs:
   release-on-pr:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
@@ -23,8 +21,25 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           yarn release
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: auto/version-bump
+          commit-message: 'chore(semver): Version Bump'
+          title: '[Semver] automated version bump'
+          body: >
+            This PR is auto-generated to bump the version of the project.
+          labels: automerge
+      - name: Approve Pull Request
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.create_pr.outputs.pull-request-number }}
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.create_pr.outputs.pull-request-number }}
+          method: squash
