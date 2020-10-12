@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2020-10-12)
+
+
+### Reverts
+
+* Revert "docs: removed the need to run `yarn release` from CONTRIBUTING.md" ([52ae2e8](https://github.com/la5ta/tally-web/commit/52ae2e85982833bd9c466fa3d46202a9917b57b8))
+
 ### [0.2.1](https://github.com/la5ta/tally-web/compare/v0.2.0...v0.2.1) (2020-10-11)
 
 
