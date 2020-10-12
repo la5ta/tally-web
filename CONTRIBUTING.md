@@ -11,4 +11,5 @@ Please note that we try to adhere to a [conventional commit message](https://www
    build.
 1. Update the [README.md](README.md) with details of changes to the interface, this includes new environment
    variables, exposed ports, useful file locations and container parameters.
-1. Once you have the sign-off of one other developers,yo can merge the Pull Request to master
+1. Once you have the sign-off of one other developers, run `yarn release` which will bump the version, generates the CHANGELOG.md, creates a commit with the changes and a new tag with the new version.
+1. You may now merge the Pull Request to master
