@@ -16,14 +16,13 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-      - name: Set git config
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
       - name: Install modules
         run: yarn add standard-version
       - name: Create Release
-        run: yarn release
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          yarn release
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
