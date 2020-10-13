@@ -11,6 +11,7 @@ on:
 jobs:
   release:
     name: 'Release NPM, GitHub, Docker'
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -48,3 +49,5 @@ jobs:
           title: 'chore(release): ${{ steps.extractver.outputs.current-version }}'
           body: 'Version bump in package.json and package-lock.json for release [${{ steps.extractver.outputs.current-version }}](https://github.com/${{github.repository}}/releases/tag/v${{ steps.extractver.outputs.current-version }})'
           branch: version-bump/${{ steps.extractver.outputs.current-version }}
+          labels: automerge
+          delete-branch: true

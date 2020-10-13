@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Autoapproving
         uses: hmarr/auto-approve-action@v2.0.0
-        if: github.actor == 'bump-bot'
+        if: github.event.label.name == 'automerge'
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
 
@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: Automerging
         uses: pascalgn/automerge-action@v0.7.5
-        if: github.actor == 'bump-bot'
+        if: github.event.label.name == 'automerge'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           GITHUB_LOGIN: asyncapi-bot
