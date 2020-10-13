@@ -8,6 +8,7 @@ This is the web system of the Tally project.
 -->
 
 ![Deps](https://img.shields.io/david/la5ta/tally-web?style=for-the-badge&labelColor=000000)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/la5ta/tally-web/CI/master?labelColor=000000&style=for-the-badge)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge&labelColor=000000)](http://commitizen.github.io/cz-cli/)
 
 ## Requirements
