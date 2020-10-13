@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2020-10-13)
+
+
+### Code Refactoring
+
+* **github:** semver action fix ([459fe8c](https://github.com/la5ta/tally-web/commit/459fe8cf7cece4cfd4c8676b3273fd9438b6c385))
+
 ### [0.2.1](https://github.com/la5ta/tally-web/compare/v0.2.0...v0.2.1) (2020-10-11)
 
 
