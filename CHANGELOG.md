@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.2.2 (2020-10-15)
+
+
+### Docs
+
+* add tests shield on README.md ([0090cc0](https://github.com/la5ta/tally-web/commit/0090cc0ef9b2d15d7a86b096f880824ba3294514))
+
 ### [0.2.1](https://github.com/la5ta/tally-web/compare/v0.2.0...v0.2.1) (2020-10-11)
 
 
