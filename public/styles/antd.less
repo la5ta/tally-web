@@ -10,7 +10,7 @@
 @layout-header-color       : @text-color;
 @layout-footer-padding     : 24px 50px;
 @layout-footer-background  : @layout-header-background;
-@layout-sider-background   : @layout-header-background;
+@layout-sider-background   : white;
 @layout-trigger-height     : 48px;
 @layout-trigger-background : #002140;
 @layout-trigger-color      : #fff;
@@ -84,8 +84,10 @@
   }
 }
 
-.content {
-  min-width: 100vw;
-}
+// Commons
+@import "./_common.less";
 
+
+// Components
 @import "./_sider.less";
+@import "./_content.less";

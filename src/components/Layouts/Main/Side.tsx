@@ -30,11 +30,11 @@ const MainLayoutSider = (): JSX.Element => {
                     <Menu.Item key="4">option4</Menu.Item>
                 </SubMenu>
             </Menu>
-            <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+            {/* <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
                 <Menu.Item key="mail" icon={<MailOutlined />}>
                     Primer Menu
                 </Menu.Item>
-            </Menu>
+            </Menu> */}
         </Sider>
     );
 };

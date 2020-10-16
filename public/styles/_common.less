@@ -1,0 +1,21 @@
+.min-width-100 {
+    min-width: 100vw;
+}
+
+
+.site-layout-content {
+    min-height: calc(100vh - 64px - 15%);
+}
+
+.blocked {
+    position: relative;
+}
+
+.blocked::before {
+    content         : '';
+    position        : absolute;
+    width           : 100vw;
+    height          : 100vh;
+    background-color: rgba(128, 128, 128, 41%);
+    z-index         : 1;
+}
