@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import MainLayoutFooter from './Footer';
 import MainLayoutHeader from './Header';
 import MainLayoutSider from './Sider';
-
 import { MenuUnfoldOutlined } from '@ant-design/icons';
-// import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import useMinScreen from '@hooks/minScreen';
 
 const { Content } = Layout;
 
@@ -30,6 +29,8 @@ const MainLayout = (
       useCollapsed(!collapsed);
     }
   }
+
+  const isPcScreen = useMinScreen(992);
   return (
     <Layout style={{ minHeight: '100vh', overflow: 'hidden' }}>
       <Head>
@@ -37,16 +38,17 @@ const MainLayout = (
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <MainLayoutSider collapsed={collapsed} useCollapsed={useCollapsed} className="show-mobile" breakpoint="lg" width={300} collapsedWidth={0} />
+
+      {!isPcScreen && <MainLayoutSider collapsed={collapsed} useCollapsed={useCollapsed} className="show-mobile" breakpoint="lg" width={300} collapsedWidth={0} />}
 
       <Content className={`min-width-100 ${collapsed ? '' : 'blocked'}`} onClick={toggleIfShowingSider}>
         <MainLayoutHeader>
-          <div className='sider-trigger show-mobile' onClick={toggle} role="button" tabIndex={0} aria-hidden="true">
+          <div id='button' className='sider-trigger show-mobile' onClick={toggle} role="button" tabIndex={0} aria-hidden="true">
             <MenuUnfoldOutlined />
           </div>
         </MainLayoutHeader>
         <Layout>
-          <MainLayoutSider collapsed={false} useCollapsed={useCollapsed} className="show-pc" breakpoint="sm" width={300} collapsedWidth={0} />
+          {isPcScreen && <MainLayoutSider collapsed={false} useCollapsed={useCollapsed} className="show-pc" breakpoint="sm" width={300} collapsedWidth={0} />}
           <Layout>
             <Content>
               <Breadcrumb>

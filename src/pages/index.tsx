@@ -79,11 +79,6 @@ const IndexPage: NextPage<Props> = ({ users = [] }) => {
               <Input.Password />
             </Form.Item>
 
-            {/* <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item> */}
           </Form>
         </Col>
       </Row>
