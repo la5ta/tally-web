@@ -1,11 +1,16 @@
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import React from 'react';
 
 const { Header } = Layout;
-const MainLayoutHeader = (): JSX.Element => {
+const MainLayoutHeader = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
 
   return (
     <Header>
+      {children}
       <div
         className="logo"
         dangerouslySetInnerHTML={{ __html: require('@images/logo.svg?include') }}

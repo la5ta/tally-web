@@ -1,15 +1,26 @@
 @import '~antd/dist/antd.less';
 
-// @primary-color: #229431;
-@layout-body-background: #fff;
-
 .logo {
   height: 100%;
-  width: 50px;
-  fill: #fff;
-  float: left;
+  width : 50px;
+  fill  : @white;
+  float : left;
 
   svg {
     vertical-align: middle;
   }
 }
+
+// variables
+@import "./_variables.less";
+
+// Commons
+@import "./_common.less";
+
+
+// Components
+@import "./_sider.less";
+@import "./_content.less";
+@import "./_antLayout.less";
+@import "./_footer.less";
+@import "./_form.less";

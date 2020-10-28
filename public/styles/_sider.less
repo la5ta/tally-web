@@ -1,0 +1,23 @@
+// to put the trigger to the level of the logo
+.sider-trigger {
+    top             : 15px;
+    line-height     : 1.4rem;
+    font-size       : 21px;
+    background-color: @white;
+    z-index         : 2;
+    position        : relative;
+    color           : @black;
+    padding         : 5px;
+    border-radius   : 0px 5px 5px 0;
+    width           : 30px;
+    float           : left;
+}
+
+// space for the first menu
+.ant-layout-sider-children {
+    margin-top: 0;
+
+    @media (max-width: @screen-md) {
+        margin-top: 64px;
+    }
+}

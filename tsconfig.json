@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -15,18 +19,48 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@components/*": ["components/*"],
-      "@queries/*": ["queries/*"],
-      "@schema/*": ["schema/*"],
-      "@models/*": ["models/*"],
-      "@config/*": ["config/*"],
-      "@pages/*": ["pages/*"],
-      "@lib/*": ["lib/*"],
-      "@public/*": ["../public/*"],
-      "@styles/*": ["../public/styles/*"],
-      "@images/*": ["../public/images/*"]
+      "@components/*": [
+        "components/*"
+      ],
+      "@queries/*": [
+        "queries/*"
+      ],
+      "@schema/*": [
+        "schema/*"
+      ],
+      "@models/*": [
+        "models/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@public/*": [
+        "../public/*"
+      ],
+      "@styles/*": [
+        "../public/styles/*"
+      ],
+      "@images/*": [
+        "../public/images/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ]
     }
   },
-  "exclude": ["node_modules", "prod_node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "node_modules",
+    "prod_node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
