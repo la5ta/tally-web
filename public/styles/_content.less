@@ -1,8 +1,11 @@
 .content {
     width           : calc(100vw - 5%);
-    background-color: white;
+    background-color: @white;
     margin          : 15px auto;
     border-radius   : 5px;
     padding         : 5px;
 
+    @media (min-width: @pc) {
+        width: 800px;
+    }
 }

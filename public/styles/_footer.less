@@ -1,0 +1,41 @@
+.footer {
+    padding: 20px;
+    width  : 100%;
+
+    .column {
+        display      : inline-block;
+        width        : 25%;
+        margin-bottom: 30px;
+
+        .item {
+            padding: 5px 0;
+        }
+
+        @media (max-width: @cellphone) {
+            width     : 100%;
+            text-align: center;
+        }
+    }
+
+    h2 {
+        color: @white;
+    }
+
+    a {
+        text-decoration: none;
+        color          : @white;
+    }
+
+    a:hover {
+        color: #4b98e1;
+    }
+
+    .separator {
+        padding: 0 5px;
+        color  : hsla(0, 0%, 100%, .4);
+    }
+
+    .description {
+        color: hsla(0, 0%, 100%, .4);
+    }
+}

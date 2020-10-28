@@ -36,7 +36,6 @@ describe('Index', () => {
   });
 
   it('should render the index with data', () => {
-    // console.log(testComponent);
     expect(testComponent.toJSON()).toMatchSnapshot();
   });
 
