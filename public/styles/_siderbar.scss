@@ -1,0 +1,39 @@
+.siderbar {
+    transition: $transition-base;
+
+    @include media-breakpoint-down(md) {
+        position     : absolute;
+        z-index      : $zindex-sticky;
+        top          : 0;
+        // height    : 100vh;
+        width        : 300px;
+        min-width    : 300px;
+        max-width    : 300px;
+        height       : 100%;
+
+        &.collapsed {
+            transform: translate(-300px, 0);
+        }
+    }
+
+
+}
+
+.showing {
+    cursor: pointer;
+
+    @include media-breakpoint-down(md) {
+        &::before {
+            content         : '';
+            height          : 100vh;
+            width           : 100vw;
+            z-index         : 2;
+            background-color: rgba($gray-400, 0.5);
+            display         : block;
+            position        : absolute;
+        }
+
+        overflow: hidden;
+        height  : 100vh !important;
+    }
+}

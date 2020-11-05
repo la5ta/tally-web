@@ -4,8 +4,8 @@ import { user } from '@models/user';
 import indexPageQuery from '@queries/indexPage';
 import { NextPage } from 'next';
 import React from 'react';
-import { Row, Col } from 'antd';
 import { fetchQuery } from 'react-relay';
+import { Form, Button } from 'react-bootstrap'
 
 interface Props {
   users?: user[];
@@ -18,17 +18,13 @@ const IndexPage: NextPage<Props> = ({ users = [] }) => {
 
   return (
     <Layout>
-      <Row>
-        <Col span={24}>
-          <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
+      <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
 
-          <h3>Users:</h3>
-          <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
-          <ol>
-            {usersItems}
-          </ol>
-        </Col>
-      </Row>
+      <h3>Users:</h3>
+      <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
+      <ol>
+        {usersItems}
+      </ol>
     </Layout>
   );
 };
