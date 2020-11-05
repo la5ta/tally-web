@@ -5,8 +5,6 @@ import indexPageQuery from '@queries/indexPage';
 import { NextPage } from 'next';
 import React from 'react';
 import { fetchQuery } from 'react-relay';
-import { Form, Button } from 'react-bootstrap'
-
 interface Props {
   users?: user[];
 }

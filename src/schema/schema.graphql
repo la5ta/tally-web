@@ -35,10 +35,85 @@ input Boolean_comparison_exp {
 # columns and relationships of "cities"
 type cities {
   _id: uuid!
+
+  # An object relationship
+  country: countries!
   country_id: uuid!
   created_at: timestamp
+
+  # An array relationship
+  customers_addresses(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): [customers_address!]!
+
+  # An aggregated array relationship
+  customers_addresses_aggregate(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): customers_address_aggregate!
   full_name: String!
   short_name: String
+
+  # An array relationship
+  stores(
+    # distinct select on columns
+    distinct_on: [stores_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [stores_order_by!]
+
+    # filter the rows returned
+    where: stores_bool_exp
+  ): [stores!]!
+
+  # An aggregated array relationship
+  stores_aggregate(
+    # distinct select on columns
+    distinct_on: [stores_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [stores_order_by!]
+
+    # filter the rows returned
+    where: stores_bool_exp
+  ): stores_aggregate!
 }
 
 # aggregated selection of "cities"
@@ -73,17 +148,17 @@ input cities_bool_exp {
   _id: uuid_comparison_exp
   _not: cities_bool_exp
   _or: [cities_bool_exp]
+  country: countries_bool_exp
   country_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
+  customers_addresses: customers_address_bool_exp
   full_name: String_comparison_exp
   short_name: String_comparison_exp
+  stores: stores_bool_exp
 }
 
 # unique or primary key constraints on table "cities"
 enum cities_constraint {
-  # unique or primary key constraint
-  cities_full_name_key
-
   # unique or primary key constraint
   cities_pkey
 }
@@ -91,10 +166,13 @@ enum cities_constraint {
 # input type for inserting data into table "cities"
 input cities_insert_input {
   _id: uuid
+  country: countries_obj_rel_insert_input
   country_id: uuid
   created_at: timestamp
+  customers_addresses: customers_address_arr_rel_insert_input
   full_name: String
   short_name: String
+  stores: stores_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -158,10 +236,13 @@ input cities_on_conflict {
 # ordering options when selecting data from "cities"
 input cities_order_by {
   _id: order_by
+  country: countries_order_by
   country_id: order_by
   created_at: order_by
+  customers_addresses_aggregate: customers_address_aggregate_order_by
   full_name: order_by
   short_name: order_by
+  stores_aggregate: stores_aggregate_order_by
 }
 
 # primary key columns input for table: "cities"
@@ -217,9 +298,158 @@ enum cities_update_column {
 # columns and relationships of "countries"
 type countries {
   _id: uuid!
+
+  # An array relationship
+  cities(
+    # distinct select on columns
+    distinct_on: [cities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [cities_order_by!]
+
+    # filter the rows returned
+    where: cities_bool_exp
+  ): [cities!]!
+
+  # An aggregated array relationship
+  cities_aggregate(
+    # distinct select on columns
+    distinct_on: [cities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [cities_order_by!]
+
+    # filter the rows returned
+    where: cities_bool_exp
+  ): cities_aggregate!
+
+  # An array relationship
+  countries_currencies(
+    # distinct select on columns
+    distinct_on: [countries_currency_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [countries_currency_order_by!]
+
+    # filter the rows returned
+    where: countries_currency_bool_exp
+  ): [countries_currency!]!
+
+  # An aggregated array relationship
+  countries_currencies_aggregate(
+    # distinct select on columns
+    distinct_on: [countries_currency_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [countries_currency_order_by!]
+
+    # filter the rows returned
+    where: countries_currency_bool_exp
+  ): countries_currency_aggregate!
+
+  # An array relationship
+  countries_taxes(
+    # distinct select on columns
+    distinct_on: [countries_taxes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [countries_taxes_order_by!]
+
+    # filter the rows returned
+    where: countries_taxes_bool_exp
+  ): [countries_taxes!]!
+
+  # An aggregated array relationship
+  countries_taxes_aggregate(
+    # distinct select on columns
+    distinct_on: [countries_taxes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [countries_taxes_order_by!]
+
+    # filter the rows returned
+    where: countries_taxes_bool_exp
+  ): countries_taxes_aggregate!
   created_at: timestamp
-  full_name: String!
-  short_name: String
+  currency: String
+
+  # An array relationship
+  customers_addresses(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): [customers_address!]!
+
+  # An aggregated array relationship
+  customers_addresses_aggregate(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): customers_address_aggregate!
+  emoji: String
+  emoji_u: String
+  iso_2: String
+  iso_3: String
+  name: String!
+  phone_code: Int
 }
 
 # aggregated selection of "countries"
@@ -230,16 +460,32 @@ type countries_aggregate {
 
 # aggregate fields of "countries"
 type countries_aggregate_fields {
+  avg: countries_avg_fields
   count(columns: [countries_select_column!], distinct: Boolean): Int
   max: countries_max_fields
   min: countries_min_fields
+  stddev: countries_stddev_fields
+  stddev_pop: countries_stddev_pop_fields
+  stddev_samp: countries_stddev_samp_fields
+  sum: countries_sum_fields
+  var_pop: countries_var_pop_fields
+  var_samp: countries_var_samp_fields
+  variance: countries_variance_fields
 }
 
 # order by aggregate values of table "countries"
 input countries_aggregate_order_by {
+  avg: countries_avg_order_by
   count: order_by
   max: countries_max_order_by
   min: countries_min_order_by
+  stddev: countries_stddev_order_by
+  stddev_pop: countries_stddev_pop_order_by
+  stddev_samp: countries_stddev_samp_order_by
+  sum: countries_sum_order_by
+  var_pop: countries_var_pop_order_by
+  var_samp: countries_var_samp_order_by
+  variance: countries_variance_order_by
 }
 
 # input type for inserting array relation for remote table "countries"
@@ -248,15 +494,34 @@ input countries_arr_rel_insert_input {
   on_conflict: countries_on_conflict
 }
 
+# aggregate avg on columns
+type countries_avg_fields {
+  phone_code: Float
+}
+
+# order by avg() on columns of table "countries"
+input countries_avg_order_by {
+  phone_code: order_by
+}
+
 # Boolean expression to filter rows from the table "countries". All fields are combined with a logical 'AND'.
 input countries_bool_exp {
   _and: [countries_bool_exp]
   _id: uuid_comparison_exp
   _not: countries_bool_exp
   _or: [countries_bool_exp]
+  cities: cities_bool_exp
+  countries_currencies: countries_currency_bool_exp
+  countries_taxes: countries_taxes_bool_exp
   created_at: timestamp_comparison_exp
-  full_name: String_comparison_exp
-  short_name: String_comparison_exp
+  currency: String_comparison_exp
+  customers_addresses: customers_address_bool_exp
+  emoji: String_comparison_exp
+  emoji_u: String_comparison_exp
+  iso_2: String_comparison_exp
+  iso_3: String_comparison_exp
+  name: String_comparison_exp
+  phone_code: Int_comparison_exp
 }
 
 # unique or primary key constraints on table "countries"
@@ -265,13 +530,22 @@ enum countries_constraint {
   countries_full_name_key
 
   # unique or primary key constraint
+  countries_iso_2_key
+
+  # unique or primary key constraint
   countries_pkey
+
+  # unique or primary key constraint
+  countries_short_name_key
 }
 
 # columns and relationships of "countries_currency"
 type countries_currency {
   _id: uuid!
   abbreviation: String
+
+  # An object relationship
+  country: countries!
   country_id: uuid!
   created_at: timestamp
   description: String
@@ -310,6 +584,7 @@ input countries_currency_bool_exp {
   _not: countries_currency_bool_exp
   _or: [countries_currency_bool_exp]
   abbreviation: String_comparison_exp
+  country: countries_bool_exp
   country_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
@@ -328,6 +603,7 @@ enum countries_currency_constraint {
 input countries_currency_insert_input {
   _id: uuid
   abbreviation: String
+  country: countries_obj_rel_insert_input
   country_id: uuid
   created_at: timestamp
   description: String
@@ -395,6 +671,7 @@ input countries_currency_on_conflict {
 input countries_currency_order_by {
   _id: order_by
   abbreviation: order_by
+  country: countries_order_by
   country_id: order_by
   created_at: order_by
   description: order_by
@@ -450,44 +727,78 @@ enum countries_currency_update_column {
   description
 }
 
+# input type for incrementing integer column in table "countries"
+input countries_inc_input {
+  phone_code: Int
+}
+
 # input type for inserting data into table "countries"
 input countries_insert_input {
   _id: uuid
+  cities: cities_arr_rel_insert_input
+  countries_currencies: countries_currency_arr_rel_insert_input
+  countries_taxes: countries_taxes_arr_rel_insert_input
   created_at: timestamp
-  full_name: String
-  short_name: String
+  currency: String
+  customers_addresses: customers_address_arr_rel_insert_input
+  emoji: String
+  emoji_u: String
+  iso_2: String
+  iso_3: String
+  name: String
+  phone_code: Int
 }
 
 # aggregate max on columns
 type countries_max_fields {
   _id: uuid
   created_at: timestamp
-  full_name: String
-  short_name: String
+  currency: String
+  emoji: String
+  emoji_u: String
+  iso_2: String
+  iso_3: String
+  name: String
+  phone_code: Int
 }
 
 # order by max() on columns of table "countries"
 input countries_max_order_by {
   _id: order_by
   created_at: order_by
-  full_name: order_by
-  short_name: order_by
+  currency: order_by
+  emoji: order_by
+  emoji_u: order_by
+  iso_2: order_by
+  iso_3: order_by
+  name: order_by
+  phone_code: order_by
 }
 
 # aggregate min on columns
 type countries_min_fields {
   _id: uuid
   created_at: timestamp
-  full_name: String
-  short_name: String
+  currency: String
+  emoji: String
+  emoji_u: String
+  iso_2: String
+  iso_3: String
+  name: String
+  phone_code: Int
 }
 
 # order by min() on columns of table "countries"
 input countries_min_order_by {
   _id: order_by
   created_at: order_by
-  full_name: order_by
-  short_name: order_by
+  currency: order_by
+  emoji: order_by
+  emoji_u: order_by
+  iso_2: order_by
+  iso_3: order_by
+  name: order_by
+  phone_code: order_by
 }
 
 # response of any mutation on the table "countries"
@@ -515,9 +826,18 @@ input countries_on_conflict {
 # ordering options when selecting data from "countries"
 input countries_order_by {
   _id: order_by
+  cities_aggregate: cities_aggregate_order_by
+  countries_currencies_aggregate: countries_currency_aggregate_order_by
+  countries_taxes_aggregate: countries_taxes_aggregate_order_by
   created_at: order_by
-  full_name: order_by
-  short_name: order_by
+  currency: order_by
+  customers_addresses_aggregate: customers_address_aggregate_order_by
+  emoji: order_by
+  emoji_u: order_by
+  iso_2: order_by
+  iso_3: order_by
+  name: order_by
+  phone_code: order_by
 }
 
 # primary key columns input for table: "countries"
@@ -534,27 +854,126 @@ enum countries_select_column {
   created_at
 
   # column name
-  full_name
+  currency
 
   # column name
-  short_name
+  emoji
+
+  # column name
+  emoji_u
+
+  # column name
+  iso_2
+
+  # column name
+  iso_3
+
+  # column name
+  name
+
+  # column name
+  phone_code
 }
 
 # input type for updating data in table "countries"
 input countries_set_input {
   _id: uuid
   created_at: timestamp
-  full_name: String
-  short_name: String
+  currency: String
+  emoji: String
+  emoji_u: String
+  iso_2: String
+  iso_3: String
+  name: String
+  phone_code: Int
+}
+
+# aggregate stddev on columns
+type countries_stddev_fields {
+  phone_code: Float
+}
+
+# order by stddev() on columns of table "countries"
+input countries_stddev_order_by {
+  phone_code: order_by
+}
+
+# aggregate stddev_pop on columns
+type countries_stddev_pop_fields {
+  phone_code: Float
+}
+
+# order by stddev_pop() on columns of table "countries"
+input countries_stddev_pop_order_by {
+  phone_code: order_by
+}
+
+# aggregate stddev_samp on columns
+type countries_stddev_samp_fields {
+  phone_code: Float
+}
+
+# order by stddev_samp() on columns of table "countries"
+input countries_stddev_samp_order_by {
+  phone_code: order_by
+}
+
+# aggregate sum on columns
+type countries_sum_fields {
+  phone_code: Int
+}
+
+# order by sum() on columns of table "countries"
+input countries_sum_order_by {
+  phone_code: order_by
 }
 
 # columns and relationships of "countries_taxes"
 type countries_taxes {
   _id: uuid!
   abbreviation: String
+
+  # An object relationship
+  country: countries!
   country_id: uuid!
   created_at: timestamp
   description: String
+
+  # An array relationship
+  products(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): [products!]!
+
+  # An aggregated array relationship
+  products_aggregate(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): products_aggregate!
   value: numeric
 }
 
@@ -617,9 +1036,11 @@ input countries_taxes_bool_exp {
   _not: countries_taxes_bool_exp
   _or: [countries_taxes_bool_exp]
   abbreviation: String_comparison_exp
+  country: countries_bool_exp
   country_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
+  products: products_bool_exp
   value: numeric_comparison_exp
 }
 
@@ -638,9 +1059,11 @@ input countries_taxes_inc_input {
 input countries_taxes_insert_input {
   _id: uuid
   abbreviation: String
+  country: countries_obj_rel_insert_input
   country_id: uuid
   created_at: timestamp
   description: String
+  products: products_arr_rel_insert_input
   value: numeric
 }
 
@@ -710,9 +1133,11 @@ input countries_taxes_on_conflict {
 input countries_taxes_order_by {
   _id: order_by
   abbreviation: order_by
+  country: countries_order_by
   country_id: order_by
   created_at: order_by
   description: order_by
+  products_aggregate: products_aggregate_order_by
   value: order_by
 }
 
@@ -852,10 +1277,55 @@ enum countries_update_column {
   created_at
 
   # column name
-  full_name
+  currency
 
   # column name
-  short_name
+  emoji
+
+  # column name
+  emoji_u
+
+  # column name
+  iso_2
+
+  # column name
+  iso_3
+
+  # column name
+  name
+
+  # column name
+  phone_code
+}
+
+# aggregate var_pop on columns
+type countries_var_pop_fields {
+  phone_code: Float
+}
+
+# order by var_pop() on columns of table "countries"
+input countries_var_pop_order_by {
+  phone_code: order_by
+}
+
+# aggregate var_samp on columns
+type countries_var_samp_fields {
+  phone_code: Float
+}
+
+# order by var_samp() on columns of table "countries"
+input countries_var_samp_order_by {
+  phone_code: order_by
+}
+
+# aggregate variance on columns
+type countries_variance_fields {
+  phone_code: Float
+}
+
+# order by variance() on columns of table "countries"
+input countries_variance_order_by {
+  phone_code: order_by
 }
 
 # columns and relationships of "customers"
@@ -863,9 +1333,153 @@ type customers {
   _id: uuid!
   accept_emarketing: bit
   created_at: timestamp
+
+  # An array relationship
+  customers_addresses(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): [customers_address!]!
+
+  # An aggregated array relationship
+  customers_addresses_aggregate(
+    # distinct select on columns
+    distinct_on: [customers_address_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_address_order_by!]
+
+    # filter the rows returned
+    where: customers_address_bool_exp
+  ): customers_address_aggregate!
+
+  # An array relationship
+  customers_tags(
+    # distinct select on columns
+    distinct_on: [customers_tags_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_tags_order_by!]
+
+    # filter the rows returned
+    where: customers_tags_bool_exp
+  ): [customers_tags!]!
+
+  # An aggregated array relationship
+  customers_tags_aggregate(
+    # distinct select on columns
+    distinct_on: [customers_tags_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [customers_tags_order_by!]
+
+    # filter the rows returned
+    where: customers_tags_bool_exp
+  ): customers_tags_aggregate!
+
+  # An array relationship
+  draft_orders(
+    # distinct select on columns
+    distinct_on: [draft_orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_bool_exp
+  ): [draft_orders!]!
+
+  # An aggregated array relationship
+  draft_orders_aggregate(
+    # distinct select on columns
+    distinct_on: [draft_orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_bool_exp
+  ): draft_orders_aggregate!
   email: String
   first_name: String
   last_name: String
+
+  # An array relationship
+  orders(
+    # distinct select on columns
+    distinct_on: [orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_order_by!]
+
+    # filter the rows returned
+    where: orders_bool_exp
+  ): [orders!]!
+
+  # An aggregated array relationship
+  orders_aggregate(
+    # distinct select on columns
+    distinct_on: [orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_order_by!]
+
+    # filter the rows returned
+    where: orders_bool_exp
+  ): orders_aggregate!
   phone_number: String
 }
 
@@ -873,9 +1487,18 @@ type customers {
 type customers_address {
   _id: uuid!
   address: String
+
+  # An object relationship
+  city: cities!
   city_id: uuid!
+
+  # An object relationship
+  country: countries!
   country_id: uuid!
   created_at: timestamp
+
+  # An object relationship
+  customer: customers!
   customer_id: uuid!
   latitude: numeric
   longitude: numeric
@@ -942,9 +1565,12 @@ input customers_address_bool_exp {
   _not: customers_address_bool_exp
   _or: [customers_address_bool_exp]
   address: String_comparison_exp
+  city: cities_bool_exp
   city_id: uuid_comparison_exp
+  country: countries_bool_exp
   country_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
+  customer: customers_bool_exp
   customer_id: uuid_comparison_exp
   latitude: numeric_comparison_exp
   longitude: numeric_comparison_exp
@@ -966,9 +1592,12 @@ input customers_address_inc_input {
 input customers_address_insert_input {
   _id: uuid
   address: String
+  city: cities_obj_rel_insert_input
   city_id: uuid
+  country: countries_obj_rel_insert_input
   country_id: uuid
   created_at: timestamp
+  customer: customers_obj_rel_insert_input
   customer_id: uuid
   latitude: numeric
   longitude: numeric
@@ -1048,9 +1677,12 @@ input customers_address_on_conflict {
 input customers_address_order_by {
   _id: order_by
   address: order_by
+  city: cities_order_by
   city_id: order_by
+  country: countries_order_by
   country_id: order_by
   created_at: order_by
+  customer: customers_order_by
   customer_id: order_by
   latitude: order_by
   longitude: order_by
@@ -1245,9 +1877,13 @@ input customers_bool_exp {
   _or: [customers_bool_exp]
   accept_emarketing: bit_comparison_exp
   created_at: timestamp_comparison_exp
+  customers_addresses: customers_address_bool_exp
+  customers_tags: customers_tags_bool_exp
+  draft_orders: draft_orders_bool_exp
   email: String_comparison_exp
   first_name: String_comparison_exp
   last_name: String_comparison_exp
+  orders: orders_bool_exp
   phone_number: String_comparison_exp
 }
 
@@ -1265,9 +1901,13 @@ input customers_insert_input {
   _id: uuid
   accept_emarketing: bit
   created_at: timestamp
+  customers_addresses: customers_address_arr_rel_insert_input
+  customers_tags: customers_tags_arr_rel_insert_input
+  draft_orders: draft_orders_arr_rel_insert_input
   email: String
   first_name: String
   last_name: String
+  orders: orders_arr_rel_insert_input
   phone_number: String
 }
 
@@ -1338,9 +1978,13 @@ input customers_order_by {
   _id: order_by
   accept_emarketing: order_by
   created_at: order_by
+  customers_addresses_aggregate: customers_address_aggregate_order_by
+  customers_tags_aggregate: customers_tags_aggregate_order_by
+  draft_orders_aggregate: draft_orders_aggregate_order_by
   email: order_by
   first_name: order_by
   last_name: order_by
+  orders_aggregate: orders_aggregate_order_by
   phone_number: order_by
 }
 
@@ -1389,6 +2033,9 @@ type customers_tags {
   _id: uuid!
   costumer_id: uuid!
   created_at: timestamp
+
+  # An object relationship
+  customer: customers!
   tag: String
 }
 
@@ -1426,6 +2073,7 @@ input customers_tags_bool_exp {
   _or: [customers_tags_bool_exp]
   costumer_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
+  customer: customers_bool_exp
   tag: String_comparison_exp
 }
 
@@ -1440,6 +2088,7 @@ input customers_tags_insert_input {
   _id: uuid
   costumer_id: uuid
   created_at: timestamp
+  customer: customers_obj_rel_insert_input
   tag: String
 }
 
@@ -1502,6 +2151,7 @@ input customers_tags_order_by {
   _id: order_by
   costumer_id: order_by
   created_at: order_by
+  customer: customers_order_by
   tag: order_by
 }
 
@@ -1576,8 +2226,50 @@ enum customers_update_column {
 type draft_orders {
   _id: uuid!
   created_at: timestamp
+
+  # An object relationship
+  customer: customers!
   customer_id: uuid!
+
+  # An array relationship
+  draft_orders_details(
+    # distinct select on columns
+    distinct_on: [draft_orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_details_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_details_bool_exp
+  ): [draft_orders_details!]!
+
+  # An aggregated array relationship
+  draft_orders_details_aggregate(
+    # distinct select on columns
+    distinct_on: [draft_orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_details_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_details_bool_exp
+  ): draft_orders_details_aggregate!
   entry_date: timestamp
+
+  # An object relationship
+  store: stores!
   store_id: uuid!
   sub_total: numeric!
   tax_total: numeric!
@@ -1647,8 +2339,11 @@ input draft_orders_bool_exp {
   _not: draft_orders_bool_exp
   _or: [draft_orders_bool_exp]
   created_at: timestamp_comparison_exp
+  customer: customers_bool_exp
   customer_id: uuid_comparison_exp
+  draft_orders_details: draft_orders_details_bool_exp
   entry_date: timestamp_comparison_exp
+  store: stores_bool_exp
   store_id: uuid_comparison_exp
   sub_total: numeric_comparison_exp
   tax_total: numeric_comparison_exp
@@ -1666,9 +2361,15 @@ type draft_orders_details {
   _id: uuid!
   created_at: timestamp
   discount_total: numeric
+
+  # An object relationship
+  draft_order: draft_orders!
   draft_order_id: uuid!
   price: numeric
   product_lot_id: uuid!
+
+  # An object relationship
+  products_lot: products_lots!
   quantity: Int
   sub_total: numeric
   tax_total: numeric
@@ -1745,9 +2446,11 @@ input draft_orders_details_bool_exp {
   _or: [draft_orders_details_bool_exp]
   created_at: timestamp_comparison_exp
   discount_total: numeric_comparison_exp
+  draft_order: draft_orders_bool_exp
   draft_order_id: uuid_comparison_exp
   price: numeric_comparison_exp
   product_lot_id: uuid_comparison_exp
+  products_lot: products_lots_bool_exp
   quantity: Int_comparison_exp
   sub_total: numeric_comparison_exp
   tax_total: numeric_comparison_exp
@@ -1775,9 +2478,11 @@ input draft_orders_details_insert_input {
   _id: uuid
   created_at: timestamp
   discount_total: numeric
+  draft_order: draft_orders_obj_rel_insert_input
   draft_order_id: uuid
   price: numeric
   product_lot_id: uuid
+  products_lot: products_lots_obj_rel_insert_input
   quantity: Int
   sub_total: numeric
   tax_total: numeric
@@ -1867,9 +2572,11 @@ input draft_orders_details_order_by {
   _id: order_by
   created_at: order_by
   discount_total: order_by
+  draft_order: draft_orders_order_by
   draft_order_id: order_by
   price: order_by
   product_lot_id: order_by
+  products_lot: products_lots_order_by
   quantity: order_by
   sub_total: order_by
   tax_total: order_by
@@ -2112,8 +2819,11 @@ input draft_orders_inc_input {
 input draft_orders_insert_input {
   _id: uuid
   created_at: timestamp
+  customer: customers_obj_rel_insert_input
   customer_id: uuid
+  draft_orders_details: draft_orders_details_arr_rel_insert_input
   entry_date: timestamp
+  store: stores_obj_rel_insert_input
   store_id: uuid
   sub_total: numeric
   tax_total: numeric
@@ -2194,8 +2904,11 @@ input draft_orders_on_conflict {
 input draft_orders_order_by {
   _id: order_by
   created_at: order_by
+  customer: customers_order_by
   customer_id: order_by
+  draft_orders_details_aggregate: draft_orders_details_aggregate_order_by
   entry_date: order_by
+  store: stores_order_by
   store_id: order_by
   sub_total: order_by
   tax_total: order_by
@@ -2389,8 +3102,14 @@ type kardex {
   _id: uuid!
   created_at: timestamp
   product_lot_id: uuid!
+
+  # An object relationship
+  products_lot: products_lots!
   quantity: numeric
   type_movement_id: uuid!
+
+  # An object relationship
+  types_movement: types_movements!
 }
 
 # aggregated selection of "kardex"
@@ -2453,8 +3172,10 @@ input kardex_bool_exp {
   _or: [kardex_bool_exp]
   created_at: timestamp_comparison_exp
   product_lot_id: uuid_comparison_exp
+  products_lot: products_lots_bool_exp
   quantity: numeric_comparison_exp
   type_movement_id: uuid_comparison_exp
+  types_movement: types_movements_bool_exp
 }
 
 # unique or primary key constraints on table "kardex"
@@ -2473,8 +3194,10 @@ input kardex_insert_input {
   _id: uuid
   created_at: timestamp
   product_lot_id: uuid
+  products_lot: products_lots_obj_rel_insert_input
   quantity: numeric
   type_movement_id: uuid
+  types_movement: types_movements_obj_rel_insert_input
 }
 
 # aggregate max on columns
@@ -2540,8 +3263,10 @@ input kardex_order_by {
   _id: order_by
   created_at: order_by
   product_lot_id: order_by
+  products_lot: products_lots_order_by
   quantity: order_by
   type_movement_id: order_by
+  types_movement: types_movements_order_by
 }
 
 # primary key columns input for table: "kardex"
@@ -3278,6 +4003,9 @@ type mutation_root {
 
   # update data of the table: "countries"
   update_countries(
+    # increments the integer columns with given value of the filtered values
+    _inc: countries_inc_input
+
     # sets the columns of the filtered rows to the given values
     _set: countries_set_input
 
@@ -3287,6 +4015,9 @@ type mutation_root {
 
   # update single row of the table: "countries"
   update_countries_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: countries_inc_input
+
     # sets the columns of the filtered rows to the given values
     _set: countries_set_input
     pk_columns: countries_pk_columns_input!
@@ -3713,9 +4444,51 @@ enum order_by {
 type orders {
   _id: uuid!
   created_at: timestamp
+
+  # An object relationship
+  customer: customers!
   customer_id: uuid!
   discount_total: numeric
   entry_date: timestamp
+
+  # An array relationship
+  orders_details(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): [orders_details!]!
+
+  # An aggregated array relationship
+  orders_details_aggregate(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): orders_details_aggregate!
+
+  # An object relationship
+  store: stores!
   store_id: uuid!
   sub_total: numeric
   tax_total: numeric
@@ -3787,9 +4560,12 @@ input orders_bool_exp {
   _not: orders_bool_exp
   _or: [orders_bool_exp]
   created_at: timestamp_comparison_exp
+  customer: customers_bool_exp
   customer_id: uuid_comparison_exp
   discount_total: numeric_comparison_exp
   entry_date: timestamp_comparison_exp
+  orders_details: orders_details_bool_exp
+  store: stores_bool_exp
   store_id: uuid_comparison_exp
   sub_total: numeric_comparison_exp
   tax_total: numeric_comparison_exp
@@ -3807,10 +4583,19 @@ type orders_details {
   _id: uuid!
   created_at: timestamp
   discount_total: numeric
+
+  # An object relationship
+  order: orders!
   order_id: uuid!
   price: numeric
+
+  # An object relationship
+  price_rule: price_rule!
   price_rule_id: uuid!
   product_lot_id: uuid!
+
+  # An object relationship
+  products_lot: products_lots!
   quantity: Int
   sub_total: numeric
   tax_total: numeric
@@ -3887,10 +4672,13 @@ input orders_details_bool_exp {
   _or: [orders_details_bool_exp]
   created_at: timestamp_comparison_exp
   discount_total: numeric_comparison_exp
+  order: orders_bool_exp
   order_id: uuid_comparison_exp
   price: numeric_comparison_exp
+  price_rule: price_rule_bool_exp
   price_rule_id: uuid_comparison_exp
   product_lot_id: uuid_comparison_exp
+  products_lot: products_lots_bool_exp
   quantity: Int_comparison_exp
   sub_total: numeric_comparison_exp
   tax_total: numeric_comparison_exp
@@ -3918,10 +4706,13 @@ input orders_details_insert_input {
   _id: uuid
   created_at: timestamp
   discount_total: numeric
+  order: orders_obj_rel_insert_input
   order_id: uuid
   price: numeric
+  price_rule: price_rule_obj_rel_insert_input
   price_rule_id: uuid
   product_lot_id: uuid
+  products_lot: products_lots_obj_rel_insert_input
   quantity: Int
   sub_total: numeric
   tax_total: numeric
@@ -4015,10 +4806,13 @@ input orders_details_order_by {
   _id: order_by
   created_at: order_by
   discount_total: order_by
+  order: orders_order_by
   order_id: order_by
   price: order_by
+  price_rule: price_rule_order_by
   price_rule_id: order_by
   product_lot_id: order_by
+  products_lot: products_lots_order_by
   quantity: order_by
   sub_total: order_by
   tax_total: order_by
@@ -4269,9 +5063,12 @@ input orders_inc_input {
 input orders_insert_input {
   _id: uuid
   created_at: timestamp
+  customer: customers_obj_rel_insert_input
   customer_id: uuid
   discount_total: numeric
   entry_date: timestamp
+  orders_details: orders_details_arr_rel_insert_input
+  store: stores_obj_rel_insert_input
   store_id: uuid
   sub_total: numeric
   tax_total: numeric
@@ -4356,9 +5153,12 @@ input orders_on_conflict {
 input orders_order_by {
   _id: order_by
   created_at: order_by
+  customer: customers_order_by
   customer_id: order_by
   discount_total: order_by
   entry_date: order_by
+  orders_details_aggregate: orders_details_aggregate_order_by
+  store: stores_order_by
   store_id: order_by
   sub_total: order_by
   tax_total: order_by
@@ -4561,8 +5361,47 @@ type price_rule {
   created_at: timestamp
   ends_at: timestamp
   once_per_costumer: bit
+
+  # An array relationship
+  orders_details(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): [orders_details!]!
+
+  # An aggregated array relationship
+  orders_details_aggregate(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): orders_details_aggregate!
   percent: bit
   price: numeric
+
+  # An object relationship
+  product: products!
   product_id: uuid!
   starts_at: timestamp
   value: numeric
@@ -4631,8 +5470,10 @@ input price_rule_bool_exp {
   created_at: timestamp_comparison_exp
   ends_at: timestamp_comparison_exp
   once_per_costumer: bit_comparison_exp
+  orders_details: orders_details_bool_exp
   percent: bit_comparison_exp
   price: numeric_comparison_exp
+  product: products_bool_exp
   product_id: uuid_comparison_exp
   starts_at: timestamp_comparison_exp
   value: numeric_comparison_exp
@@ -4656,8 +5497,10 @@ input price_rule_insert_input {
   created_at: timestamp
   ends_at: timestamp
   once_per_costumer: bit
+  orders_details: orders_details_arr_rel_insert_input
   percent: bit
   price: numeric
+  product: products_obj_rel_insert_input
   product_id: uuid
   starts_at: timestamp
   value: numeric
@@ -4735,8 +5578,10 @@ input price_rule_order_by {
   created_at: order_by
   ends_at: order_by
   once_per_costumer: order_by
+  orders_details_aggregate: orders_details_aggregate_order_by
   percent: order_by
   price: order_by
+  product: products_order_by
   product_id: order_by
   starts_at: order_by
   value: order_by
@@ -4908,13 +5753,166 @@ input price_rule_variance_order_by {
 type products {
   _id: uuid!
   cost: numeric
+
+  # An object relationship
+  countries_tax: countries_taxes!
   country_tax_id: uuid!
   created_at: timestamp
   description: String
   full_name: String
   price: numeric
   price_compared: numeric
+
+  # An array relationship
+  price_rules(
+    # distinct select on columns
+    distinct_on: [price_rule_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [price_rule_order_by!]
+
+    # filter the rows returned
+    where: price_rule_bool_exp
+  ): [price_rule!]!
+
+  # An aggregated array relationship
+  price_rules_aggregate(
+    # distinct select on columns
+    distinct_on: [price_rule_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [price_rule_order_by!]
+
+    # filter the rows returned
+    where: price_rule_bool_exp
+  ): price_rule_aggregate!
   product_category_id: uuid!
+
+  # An object relationship
+  products_category: products_categories!
+
+  # An array relationship
+  products_lots(
+    # distinct select on columns
+    distinct_on: [products_lots_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_lots_order_by!]
+
+    # filter the rows returned
+    where: products_lots_bool_exp
+  ): [products_lots!]!
+
+  # An aggregated array relationship
+  products_lots_aggregate(
+    # distinct select on columns
+    distinct_on: [products_lots_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_lots_order_by!]
+
+    # filter the rows returned
+    where: products_lots_bool_exp
+  ): products_lots_aggregate!
+
+  # An array relationship
+  products_media(
+    # distinct select on columns
+    distinct_on: [products_media_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_media_order_by!]
+
+    # filter the rows returned
+    where: products_media_bool_exp
+  ): [products_media!]!
+
+  # An aggregated array relationship
+  products_media_aggregate(
+    # distinct select on columns
+    distinct_on: [products_media_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_media_order_by!]
+
+    # filter the rows returned
+    where: products_media_bool_exp
+  ): products_media_aggregate!
+
+  # An array relationship
+  products_tags(
+    # distinct select on columns
+    distinct_on: [products_tags_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_tags_order_by!]
+
+    # filter the rows returned
+    where: products_tags_bool_exp
+  ): [products_tags!]!
+
+  # An aggregated array relationship
+  products_tags_aggregate(
+    # distinct select on columns
+    distinct_on: [products_tags_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_tags_order_by!]
+
+    # filter the rows returned
+    where: products_tags_bool_exp
+  ): products_tags_aggregate!
+
+  # An object relationship
+  store: stores!
   store_id: uuid!
 }
 
@@ -4981,13 +5979,20 @@ input products_bool_exp {
   _not: products_bool_exp
   _or: [products_bool_exp]
   cost: numeric_comparison_exp
+  countries_tax: countries_taxes_bool_exp
   country_tax_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
   full_name: String_comparison_exp
   price: numeric_comparison_exp
   price_compared: numeric_comparison_exp
+  price_rules: price_rule_bool_exp
   product_category_id: uuid_comparison_exp
+  products_category: products_categories_bool_exp
+  products_lots: products_lots_bool_exp
+  products_media: products_media_bool_exp
+  products_tags: products_tags_bool_exp
+  store: stores_bool_exp
   store_id: uuid_comparison_exp
 }
 
@@ -4996,6 +6001,42 @@ type products_categories {
   _id: uuid!
   created_at: timestamp
   description: String
+
+  # An array relationship
+  products(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): [products!]!
+
+  # An aggregated array relationship
+  products_aggregate(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): products_aggregate!
 }
 
 # aggregated selection of "products_categories"
@@ -5032,6 +6073,7 @@ input products_categories_bool_exp {
   _or: [products_categories_bool_exp]
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
+  products: products_bool_exp
 }
 
 # unique or primary key constraints on table "products_categories"
@@ -5045,6 +6087,7 @@ input products_categories_insert_input {
   _id: uuid
   created_at: timestamp
   description: String
+  products: products_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -5102,6 +6145,7 @@ input products_categories_order_by {
   _id: order_by
   created_at: order_by
   description: order_by
+  products_aggregate: products_aggregate_order_by
 }
 
 # primary key columns input for table: "products_categories"
@@ -5157,13 +6201,20 @@ input products_inc_input {
 input products_insert_input {
   _id: uuid
   cost: numeric
+  countries_tax: countries_taxes_obj_rel_insert_input
   country_tax_id: uuid
   created_at: timestamp
   description: String
   full_name: String
   price: numeric
   price_compared: numeric
+  price_rules: price_rule_arr_rel_insert_input
   product_category_id: uuid
+  products_category: products_categories_obj_rel_insert_input
+  products_lots: products_lots_arr_rel_insert_input
+  products_media: products_media_arr_rel_insert_input
+  products_tags: products_tags_arr_rel_insert_input
+  store: stores_obj_rel_insert_input
   store_id: uuid
 }
 
@@ -5171,9 +6222,120 @@ input products_insert_input {
 type products_lots {
   _id: uuid!
   created_at: timestamp
+
+  # An array relationship
+  draft_orders_details(
+    # distinct select on columns
+    distinct_on: [draft_orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_details_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_details_bool_exp
+  ): [draft_orders_details!]!
+
+  # An aggregated array relationship
+  draft_orders_details_aggregate(
+    # distinct select on columns
+    distinct_on: [draft_orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_details_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_details_bool_exp
+  ): draft_orders_details_aggregate!
   entry_date: timestamp
   entry_quantity: Int
   expires_date: timestamp
+
+  # An array relationship
+  kardexes(
+    # distinct select on columns
+    distinct_on: [kardex_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [kardex_order_by!]
+
+    # filter the rows returned
+    where: kardex_bool_exp
+  ): [kardex!]!
+
+  # An aggregated array relationship
+  kardexes_aggregate(
+    # distinct select on columns
+    distinct_on: [kardex_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [kardex_order_by!]
+
+    # filter the rows returned
+    where: kardex_bool_exp
+  ): kardex_aggregate!
+
+  # An array relationship
+  orders_details(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): [orders_details!]!
+
+  # An aggregated array relationship
+  orders_details_aggregate(
+    # distinct select on columns
+    distinct_on: [orders_details_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_details_order_by!]
+
+    # filter the rows returned
+    where: orders_details_bool_exp
+  ): orders_details_aggregate!
+
+  # An object relationship
+  product: products!
   product_id: uuid!
   product_media_id: uuid
   quantity: Int
@@ -5241,9 +6403,13 @@ input products_lots_bool_exp {
   _not: products_lots_bool_exp
   _or: [products_lots_bool_exp]
   created_at: timestamp_comparison_exp
+  draft_orders_details: draft_orders_details_bool_exp
   entry_date: timestamp_comparison_exp
   entry_quantity: Int_comparison_exp
   expires_date: timestamp_comparison_exp
+  kardexes: kardex_bool_exp
+  orders_details: orders_details_bool_exp
+  product: products_bool_exp
   product_id: uuid_comparison_exp
   product_media_id: uuid_comparison_exp
   quantity: Int_comparison_exp
@@ -5266,9 +6432,13 @@ input products_lots_inc_input {
 input products_lots_insert_input {
   _id: uuid
   created_at: timestamp
+  draft_orders_details: draft_orders_details_arr_rel_insert_input
   entry_date: timestamp
   entry_quantity: Int
   expires_date: timestamp
+  kardexes: kardex_arr_rel_insert_input
+  orders_details: orders_details_arr_rel_insert_input
+  product: products_obj_rel_insert_input
   product_id: uuid
   product_media_id: uuid
   quantity: Int
@@ -5353,9 +6523,13 @@ input products_lots_on_conflict {
 input products_lots_order_by {
   _id: order_by
   created_at: order_by
+  draft_orders_details_aggregate: draft_orders_details_aggregate_order_by
   entry_date: order_by
   entry_quantity: order_by
   expires_date: order_by
+  kardexes_aggregate: kardex_aggregate_order_by
+  orders_details_aggregate: orders_details_aggregate_order_by
+  product: products_order_by
   product_id: order_by
   product_media_id: order_by
   quantity: order_by
@@ -5558,6 +6732,9 @@ type products_media {
   created_at: timestamp
   path: String
   primary_media: Boolean
+
+  # An object relationship
+  product: products!
   product_id: uuid!
 }
 
@@ -5596,6 +6773,7 @@ input products_media_bool_exp {
   created_at: timestamp_comparison_exp
   path: String_comparison_exp
   primary_media: Boolean_comparison_exp
+  product: products_bool_exp
   product_id: uuid_comparison_exp
 }
 
@@ -5611,6 +6789,7 @@ input products_media_insert_input {
   created_at: timestamp
   path: String
   primary_media: Boolean
+  product: products_obj_rel_insert_input
   product_id: uuid
 }
 
@@ -5674,6 +6853,7 @@ input products_media_order_by {
   created_at: order_by
   path: order_by
   primary_media: order_by
+  product: products_order_by
   product_id: order_by
 }
 
@@ -5781,13 +6961,20 @@ input products_on_conflict {
 input products_order_by {
   _id: order_by
   cost: order_by
+  countries_tax: countries_taxes_order_by
   country_tax_id: order_by
   created_at: order_by
   description: order_by
   full_name: order_by
   price: order_by
   price_compared: order_by
+  price_rules_aggregate: price_rule_aggregate_order_by
   product_category_id: order_by
+  products_category: products_categories_order_by
+  products_lots_aggregate: products_lots_aggregate_order_by
+  products_media_aggregate: products_media_aggregate_order_by
+  products_tags_aggregate: products_tags_aggregate_order_by
+  store: stores_order_by
   store_id: order_by
 }
 
@@ -5903,6 +7090,9 @@ input products_sum_order_by {
 type products_tags {
   _id: uuid!
   created_at: timestamp
+
+  # An object relationship
+  product: products!
   product_id: uuid!
   tag: String
 }
@@ -5940,6 +7130,7 @@ input products_tags_bool_exp {
   _not: products_tags_bool_exp
   _or: [products_tags_bool_exp]
   created_at: timestamp_comparison_exp
+  product: products_bool_exp
   product_id: uuid_comparison_exp
   tag: String_comparison_exp
 }
@@ -5954,6 +7145,7 @@ enum products_tags_constraint {
 input products_tags_insert_input {
   _id: uuid
   created_at: timestamp
+  product: products_obj_rel_insert_input
   product_id: uuid
   tag: String
 }
@@ -6016,6 +7208,7 @@ input products_tags_on_conflict {
 input products_tags_order_by {
   _id: order_by
   created_at: order_by
+  product: products_order_by
   product_id: order_by
   tag: order_by
 }
@@ -7003,12 +8196,195 @@ type query_root {
 type stores {
   _id: uuid!
   address: String
+
+  # An object relationship
+  city: cities!
   city_id: uuid!
   contact_email: String
   created_at: timestamp
+
+  # An array relationship
+  draft_orders(
+    # distinct select on columns
+    distinct_on: [draft_orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_bool_exp
+  ): [draft_orders!]!
+
+  # An aggregated array relationship
+  draft_orders_aggregate(
+    # distinct select on columns
+    distinct_on: [draft_orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [draft_orders_order_by!]
+
+    # filter the rows returned
+    where: draft_orders_bool_exp
+  ): draft_orders_aggregate!
   full_name: String
   logo: String
+
+  # An array relationship
+  orders(
+    # distinct select on columns
+    distinct_on: [orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_order_by!]
+
+    # filter the rows returned
+    where: orders_bool_exp
+  ): [orders!]!
+
+  # An aggregated array relationship
+  orders_aggregate(
+    # distinct select on columns
+    distinct_on: [orders_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [orders_order_by!]
+
+    # filter the rows returned
+    where: orders_bool_exp
+  ): orders_aggregate!
+
+  # An array relationship
+  products(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): [products!]!
+
+  # An aggregated array relationship
+  products_aggregate(
+    # distinct select on columns
+    distinct_on: [products_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [products_order_by!]
+
+    # filter the rows returned
+    where: products_bool_exp
+  ): products_aggregate!
   short_name: String
+
+  # An array relationship
+  stores_categories(
+    # distinct select on columns
+    distinct_on: [stores_categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [stores_categories_order_by!]
+
+    # filter the rows returned
+    where: stores_categories_bool_exp
+  ): [stores_categories!]!
+
+  # An aggregated array relationship
+  stores_categories_aggregate(
+    # distinct select on columns
+    distinct_on: [stores_categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [stores_categories_order_by!]
+
+    # filter the rows returned
+    where: stores_categories_bool_exp
+  ): stores_categories_aggregate!
+
+  # An array relationship
+  users(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): [users!]!
+
+  # An aggregated array relationship
+  users_aggregate(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): users_aggregate!
 }
 
 # aggregated selection of "stores"
@@ -7044,12 +8420,18 @@ input stores_bool_exp {
   _not: stores_bool_exp
   _or: [stores_bool_exp]
   address: String_comparison_exp
+  city: cities_bool_exp
   city_id: uuid_comparison_exp
   contact_email: String_comparison_exp
   created_at: timestamp_comparison_exp
+  draft_orders: draft_orders_bool_exp
   full_name: String_comparison_exp
   logo: String_comparison_exp
+  orders: orders_bool_exp
+  products: products_bool_exp
   short_name: String_comparison_exp
+  stores_categories: stores_categories_bool_exp
+  users: users_bool_exp
 }
 
 # columns and relationships of "stores_categories"
@@ -7057,6 +8439,9 @@ type stores_categories {
   _id: uuid!
   created_at: timestamp
   description: String
+
+  # An object relationship
+  store: stores!
   store_id: uuid!
 }
 
@@ -7094,6 +8479,7 @@ input stores_categories_bool_exp {
   _or: [stores_categories_bool_exp]
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
+  store: stores_bool_exp
   store_id: uuid_comparison_exp
 }
 
@@ -7108,6 +8494,7 @@ input stores_categories_insert_input {
   _id: uuid
   created_at: timestamp
   description: String
+  store: stores_obj_rel_insert_input
   store_id: uuid
 }
 
@@ -7170,6 +8557,7 @@ input stores_categories_order_by {
   _id: order_by
   created_at: order_by
   description: order_by
+  store: stores_order_by
   store_id: order_by
 }
 
@@ -7229,12 +8617,18 @@ enum stores_constraint {
 input stores_insert_input {
   _id: uuid
   address: String
+  city: cities_obj_rel_insert_input
   city_id: uuid
   contact_email: String
   created_at: timestamp
+  draft_orders: draft_orders_arr_rel_insert_input
   full_name: String
   logo: String
+  orders: orders_arr_rel_insert_input
+  products: products_arr_rel_insert_input
   short_name: String
+  stores_categories: stores_categories_arr_rel_insert_input
+  users: users_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -7311,12 +8705,18 @@ input stores_on_conflict {
 input stores_order_by {
   _id: order_by
   address: order_by
+  city: cities_order_by
   city_id: order_by
   contact_email: order_by
   created_at: order_by
+  draft_orders_aggregate: draft_orders_aggregate_order_by
   full_name: order_by
   logo: order_by
+  orders_aggregate: orders_aggregate_order_by
+  products_aggregate: products_aggregate_order_by
   short_name: order_by
+  stores_categories_aggregate: stores_categories_aggregate_order_by
+  users_aggregate: users_aggregate_order_by
 }
 
 # primary key columns input for table: "stores"
@@ -8292,6 +9692,42 @@ type types_movements {
   credit: bit
   debit: bit
   description: String
+
+  # An array relationship
+  kardexes(
+    # distinct select on columns
+    distinct_on: [kardex_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [kardex_order_by!]
+
+    # filter the rows returned
+    where: kardex_bool_exp
+  ): [kardex!]!
+
+  # An aggregated array relationship
+  kardexes_aggregate(
+    # distinct select on columns
+    distinct_on: [kardex_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [kardex_order_by!]
+
+    # filter the rows returned
+    where: kardex_bool_exp
+  ): kardex_aggregate!
 }
 
 # aggregated selection of "types_movements"
@@ -8330,6 +9766,7 @@ input types_movements_bool_exp {
   credit: bit_comparison_exp
   debit: bit_comparison_exp
   description: String_comparison_exp
+  kardexes: kardex_bool_exp
 }
 
 # unique or primary key constraints on table "types_movements"
@@ -8345,6 +9782,7 @@ input types_movements_insert_input {
   credit: bit
   debit: bit
   description: String
+  kardexes: kardex_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -8404,6 +9842,7 @@ input types_movements_order_by {
   credit: order_by
   debit: order_by
   description: order_by
+  kardexes_aggregate: kardex_aggregate_order_by
 }
 
 # primary key columns input for table: "types_movements"
@@ -8464,6 +9903,9 @@ type users {
   first_name: String
   last_name: String
   password: String
+
+  # An object relationship
+  store: stores!
   store_id: uuid!
 }
 
@@ -8504,6 +9946,7 @@ input users_bool_exp {
   first_name: String_comparison_exp
   last_name: String_comparison_exp
   password: String_comparison_exp
+  store: stores_bool_exp
   store_id: uuid_comparison_exp
 }
 
@@ -8521,6 +9964,7 @@ input users_insert_input {
   first_name: String
   last_name: String
   password: String
+  store: stores_obj_rel_insert_input
   store_id: uuid
 }
 
@@ -8598,6 +10042,7 @@ input users_order_by {
   first_name: order_by
   last_name: order_by
   password: order_by
+  store: stores_order_by
   store_id: order_by
 }
 
