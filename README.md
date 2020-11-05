@@ -17,7 +17,7 @@ We mainly use the following to work in this project:
 - [NextJS](https://nextjs.org/)
 - [React](https://reactjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
-- [Ant Design](https://ant.design/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
 
 ## Installation
 
