@@ -370,42 +370,6 @@ type countries {
     # filter the rows returned
     where: countries_currency_bool_exp
   ): countries_currency_aggregate!
-
-  # An array relationship
-  countries_taxes(
-    # distinct select on columns
-    distinct_on: [countries_taxes_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [countries_taxes_order_by!]
-
-    # filter the rows returned
-    where: countries_taxes_bool_exp
-  ): [countries_taxes!]!
-
-  # An aggregated array relationship
-  countries_taxes_aggregate(
-    # distinct select on columns
-    distinct_on: [countries_taxes_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [countries_taxes_order_by!]
-
-    # filter the rows returned
-    where: countries_taxes_bool_exp
-  ): countries_taxes_aggregate!
   created_at: timestamp
   currency: String
 
@@ -512,7 +476,6 @@ input countries_bool_exp {
   _or: [countries_bool_exp]
   cities: cities_bool_exp
   countries_currencies: countries_currency_bool_exp
-  countries_taxes: countries_taxes_bool_exp
   created_at: timestamp_comparison_exp
   currency: String_comparison_exp
   customers_addresses: customers_address_bool_exp
@@ -737,7 +700,6 @@ input countries_insert_input {
   _id: uuid
   cities: cities_arr_rel_insert_input
   countries_currencies: countries_currency_arr_rel_insert_input
-  countries_taxes: countries_taxes_arr_rel_insert_input
   created_at: timestamp
   currency: String
   customers_addresses: customers_address_arr_rel_insert_input
@@ -828,7 +790,6 @@ input countries_order_by {
   _id: order_by
   cities_aggregate: cities_aggregate_order_by
   countries_currencies_aggregate: countries_currency_aggregate_order_by
-  countries_taxes_aggregate: countries_taxes_aggregate_order_by
   created_at: order_by
   currency: order_by
   customers_addresses_aggregate: customers_address_aggregate_order_by
@@ -932,9 +893,6 @@ input countries_sum_order_by {
 type countries_taxes {
   _id: uuid!
   abbreviation: String
-
-  # An object relationship
-  country: countries!
   country_id: uuid!
   created_at: timestamp
   description: String
@@ -1036,7 +994,6 @@ input countries_taxes_bool_exp {
   _not: countries_taxes_bool_exp
   _or: [countries_taxes_bool_exp]
   abbreviation: String_comparison_exp
-  country: countries_bool_exp
   country_id: uuid_comparison_exp
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
@@ -1059,7 +1016,6 @@ input countries_taxes_inc_input {
 input countries_taxes_insert_input {
   _id: uuid
   abbreviation: String
-  country: countries_obj_rel_insert_input
   country_id: uuid
   created_at: timestamp
   description: String
@@ -1133,7 +1089,6 @@ input countries_taxes_on_conflict {
 input countries_taxes_order_by {
   _id: order_by
   abbreviation: order_by
-  country: countries_order_by
   country_id: order_by
   created_at: order_by
   description: order_by
@@ -6037,6 +5992,7 @@ type products_categories {
     # filter the rows returned
     where: products_bool_exp
   ): products_aggregate!
+  store_id: uuid!
 }
 
 # aggregated selection of "products_categories"
@@ -6074,6 +6030,7 @@ input products_categories_bool_exp {
   created_at: timestamp_comparison_exp
   description: String_comparison_exp
   products: products_bool_exp
+  store_id: uuid_comparison_exp
 }
 
 # unique or primary key constraints on table "products_categories"
@@ -6088,6 +6045,7 @@ input products_categories_insert_input {
   created_at: timestamp
   description: String
   products: products_arr_rel_insert_input
+  store_id: uuid
 }
 
 # aggregate max on columns
@@ -6095,6 +6053,7 @@ type products_categories_max_fields {
   _id: uuid
   created_at: timestamp
   description: String
+  store_id: uuid
 }
 
 # order by max() on columns of table "products_categories"
@@ -6102,6 +6061,7 @@ input products_categories_max_order_by {
   _id: order_by
   created_at: order_by
   description: order_by
+  store_id: order_by
 }
 
 # aggregate min on columns
@@ -6109,6 +6069,7 @@ type products_categories_min_fields {
   _id: uuid
   created_at: timestamp
   description: String
+  store_id: uuid
 }
 
 # order by min() on columns of table "products_categories"
@@ -6116,6 +6077,7 @@ input products_categories_min_order_by {
   _id: order_by
   created_at: order_by
   description: order_by
+  store_id: order_by
 }
 
 # response of any mutation on the table "products_categories"
@@ -6146,6 +6108,7 @@ input products_categories_order_by {
   created_at: order_by
   description: order_by
   products_aggregate: products_aggregate_order_by
+  store_id: order_by
 }
 
 # primary key columns input for table: "products_categories"
@@ -6163,6 +6126,9 @@ enum products_categories_select_column {
 
   # column name
   description
+
+  # column name
+  store_id
 }
 
 # input type for updating data in table "products_categories"
@@ -6170,6 +6136,7 @@ input products_categories_set_input {
   _id: uuid
   created_at: timestamp
   description: String
+  store_id: uuid
 }
 
 # update columns of table "products_categories"
@@ -6182,6 +6149,9 @@ enum products_categories_update_column {
 
   # column name
   description
+
+  # column name
+  store_id
 }
 
 # unique or primary key constraints on table "products"

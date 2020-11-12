@@ -39,7 +39,11 @@ const MainLayout = (
               <Sidebar />
             </Col>
             <Col xs={12} md={10}>
-              <div className="site-layout-content">{children}</div>
+              <Row className="justify-content-md-center">
+                <Col xs={12} md={10}>
+                  {children}
+                </Col>
+              </Row>
             </Col>
           </Row>
 

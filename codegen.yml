@@ -1,0 +1,5 @@
+schema: https://golden-rodent-51.hasura.app/v1/graphql
+generates:
+    ./src/lib/model.d.ts:
+        plugins:
+            - typescript

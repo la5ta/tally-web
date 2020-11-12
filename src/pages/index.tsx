@@ -1,12 +1,12 @@
 import Layout from '@components/Layouts/Main/Main';
+import { Users } from '@lib/model';
 import { initEnvironment } from '@lib/relay';
-import { user } from '@models/user';
 import indexPageQuery from '@queries/indexPage';
 import { NextPage } from 'next';
 import React from 'react';
 import { fetchQuery } from 'react-relay';
 interface Props {
-  users?: user[];
+  users?: Users[];
 }
 
 const IndexPage: NextPage<Props> = ({ users = [] }) => {
@@ -34,7 +34,7 @@ export async function getStaticProps(): Promise<unknown> {
 
   return {
     props: {
-      ...(queryProps as { users: user[]; }),
+      ...(queryProps as { users: Users[]; }),
       initialRecords,
     },
   };

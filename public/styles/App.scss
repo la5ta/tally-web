@@ -1,8 +1,11 @@
 // Changing the variables of the theme
-@import "_variables.scss";
+@import "_theme.scss";
 
 // Importing the bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+// Importing changes on variables
+@import "_variables.scss";
 
 // Importing utilities
 @import "_utilities.scss";
@@ -11,3 +14,5 @@
 @import "_header.scss";
 @import "_siderbar.scss";
 @import "_footer.scss";
+@import "_body.scss";
+@import "_page-section.scss";
