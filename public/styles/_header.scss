@@ -1,0 +1,28 @@
+.logo {
+    height: 100%;
+    width : 50px;
+    fill  : $light;
+    float : left;
+
+    svg {
+        vertical-align: middle;
+    }
+
+}
+
+.brand {
+    margin-bottom: 0;
+    line-height  : 1.7;
+}
+
+.menu {
+    color    : $white;
+    font-size: 28px;
+    margin   : 0 10px;
+}
+
+@include media-breakpoint-up(lg) {
+    .menu {
+        display: none;
+    }
+}

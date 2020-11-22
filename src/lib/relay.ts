@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes';
+import { request } from 'graphql-request';
+import { RequestDocument } from 'graphql-request/dist/types';
 
 let relayEnvironment: Environment;
 
@@ -56,4 +58,9 @@ export function useEnvironment(initialRecords: RecordMap) {
     initialRecords,
   ]);
   return store;
+}
+
+// Fetcher for Usr
+export function fetcher<T>(query: RequestDocument): Promise<T> {
+  return request<T>(process.env.NEXT_PUBLIC_RELAY_ENDPOINT, query);
 }

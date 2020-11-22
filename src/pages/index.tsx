@@ -1,14 +1,12 @@
 import Layout from '@components/Layouts/Main/Main';
+import { Users } from '@lib/model';
 import { initEnvironment } from '@lib/relay';
-import { user } from '@models/user';
 import indexPageQuery from '@queries/indexPage';
 import { NextPage } from 'next';
 import React from 'react';
-import { Row, Col } from 'antd';
 import { fetchQuery } from 'react-relay';
-
 interface Props {
-  users?: user[];
+  users?: Users[];
 }
 
 const IndexPage: NextPage<Props> = ({ users = [] }) => {
@@ -18,17 +16,13 @@ const IndexPage: NextPage<Props> = ({ users = [] }) => {
 
   return (
     <Layout>
-      <Row>
-        <Col span={24}>
-          <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
+      <h1>Hello there!! <span role="img" aria-label="hand wave">👋</span></h1>
 
-          <h3>Users:</h3>
-          <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
-          <ol>
-            {usersItems}
-          </ol>
-        </Col>
-      </Row>
+      <h3>Users:</h3>
+      <p>{process.env.NEXT_PUBLIC_RELAY_ENDPOINT}</p>
+      <ol>
+        {usersItems}
+      </ol>
     </Layout>
   );
 };
@@ -40,7 +34,7 @@ export async function getStaticProps(): Promise<unknown> {
 
   return {
     props: {
-      ...(queryProps as { users: user[]; }),
+      ...(queryProps as { users: Users[]; }),
       initialRecords,
     },
   };
