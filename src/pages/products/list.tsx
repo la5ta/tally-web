@@ -43,7 +43,7 @@ const ListPage: NextPage = () => {
     <Layout>
       <div className="page-section">
         <h3>Listado de Productos</h3>
-        <Link href="./newProduct">
+        <Link href="./edit">
           <Button variant="primary">Nuevo Producto</Button>
         </Link>
         <Table responsive="sm">

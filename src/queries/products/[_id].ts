@@ -1,9 +1,8 @@
 import { Products_Insert_Input } from "@lib/model";
-import Router from "next/router";
-import { commitMutation, Environment, graphql } from "react-relay";
+import { commitMutation, Disposable, Environment, graphql } from "react-relay";
 
 const mutation = graphql`
-  mutation insertProductsMutation(
+  mutation IdMutation(
     $cost: numeric = ""
     $country_tax_id: uuid = ""
     $description: String = ""
@@ -30,7 +29,7 @@ const mutation = graphql`
   }
 `;
 
-function insertProducts({
+const gqlInsert = ({
   environment,
   cost,
   country_tax_id,
@@ -50,7 +49,7 @@ function insertProducts({
   price_compared: number;
   product_category_id: string;
   store_id: string;
-}): void {
+}): Promise<Disposable> => {
   const variables: Products_Insert_Input = {
     cost,
     country_tax_id,
@@ -62,17 +61,50 @@ function insertProducts({
     store_id,
   };
 
-  commitMutation(environment, {
-    mutation,
-    variables,
-    onCompleted: (response) => {
-      console.log("Response received from server.", response);
-      Router.push("/products/list");
-    },
-    onError: (err) => {
-      console.error(err);
-    },
+  return new Promise((resolve, reject) => {
+    commitMutation(environment, {
+      mutation,
+      variables,
+      onCompleted: resolve,
+      onError: reject,
+    });
   });
-}
+};
 
-export default insertProducts;
+const gqlSWRQuery = graphql`
+  query IdSWRQuery($store_id: uuid = "", $country_id: uuid = "") {
+    countries_taxes(where: { country_id: { _eq: $country_id } }) {
+      _id
+      abbreviation
+      description
+      value
+      country_id
+    }
+    products_categories(where: { store_id: { _eq: $store_id } }) {
+      _id
+      description
+    }
+  }
+`;
+
+const gqlSSRQuery = graphql`
+  query IdQuery($_id: uuid) {
+    products(where: { _id: { _eq: $_id } }) {
+      _id
+      cost
+      country_tax_id
+      created_at
+      description
+      full_name
+      price
+      price_compared
+      product_category_id
+      store_id
+      products_category {
+        description
+      }
+    }
+  }
+`;
+
+export { gqlSSRQuery, gqlSWRQuery, gqlInsert };

@@ -3,10 +3,10 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type productList_ListQueryVariables = {
+export type IdQueryVariables = {
     _id?: unknown | null;
 };
-export type productList_ListQueryResponse = {
+export type IdQueryResponse = {
     readonly products: ReadonlyArray<{
         readonly _id: unknown;
         readonly cost: unknown | null;
@@ -23,15 +23,15 @@ export type productList_ListQueryResponse = {
         };
     }>;
 };
-export type productList_ListQuery = {
-    readonly response: productList_ListQueryResponse;
-    readonly variables: productList_ListQueryVariables;
+export type IdQuery = {
+    readonly response: IdQueryResponse;
+    readonly variables: IdQueryVariables;
 };
 
 
 
 /*
-query productList_ListQuery(
+query IdQuery(
   $_id: uuid
 ) {
   products(where: {_id: {_eq: $_id}}) {
@@ -179,7 +179,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "productList_ListQuery",
+    "name": "IdQuery",
     "selections": (v2/*: any*/),
     "type": "query_root",
     "abstractKey": null
@@ -188,18 +188,18 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "productList_ListQuery",
+    "name": "IdQuery",
     "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "6a3fed850dba637d128c7fb066c4cb9a",
+    "cacheID": "bd04dcd01a28827708c61b4a32b29bf7",
     "id": null,
     "metadata": {},
-    "name": "productList_ListQuery",
+    "name": "IdQuery",
     "operationKind": "query",
-    "text": "query productList_ListQuery(\n  $_id: uuid\n) {\n  products(where: {_id: {_eq: $_id}}) {\n    _id\n    cost\n    country_tax_id\n    created_at\n    description\n    full_name\n    price\n    price_compared\n    product_category_id\n    store_id\n    products_category {\n      description\n    }\n  }\n}\n"
+    "text": "query IdQuery(\n  $_id: uuid\n) {\n  products(where: {_id: {_eq: $_id}}) {\n    _id\n    cost\n    country_tax_id\n    created_at\n    description\n    full_name\n    price\n    price_compared\n    product_category_id\n    store_id\n    products_category {\n      description\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '6e193b20b15fb87c8566a22987e4ed2c';
+(node as any).hash = 'ebedc218e19d073ac5de3d0589246d3e';
 export default node;
